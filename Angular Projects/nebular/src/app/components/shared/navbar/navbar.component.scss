@@ -1,0 +1,66 @@
+
+.navButton i{
+    font-size: 1.25rem;
+}
+
+/* Large screens */
+@media only screen and (min-width: 600px) {
+    hr{
+    background-color: var(color-primary-900);
+    width: 75%;
+    }   
+
+    .navContainer{
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navButton {
+        height: 3rem;
+        width: 3rem;
+        margin: 0.5rem auto;
+    }
+
+    .disapearOnSidebar{
+        display: none;
+    }
+    
+}
+
+/* Small Screens */
+@media only screen and (max-width: 600px) {
+    .navContainer{
+        padding: 0;
+        display: flex;
+        flex-direction: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .navButton {
+        height: 3rem;
+        width: 3rem;
+        margin: auto 0.25rem;
+    }
+    .disapearOnFooter{
+        display: none;
+    }
+
+    .optionsContainer{
+        padding: 0;
+        display: flex;
+        flex-direction: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+}
+
+/* Extra Small Screens */
+@media only screen and (max-width: 320px) {
+    .disapearOnXS{
+        display: none;
+    }
+}
+

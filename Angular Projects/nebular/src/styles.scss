@@ -1,0 +1,59 @@
+@import 'themes';
+
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+};
+/* You can add global styles to this file, and also import other style files */
+
+body, html{
+  background-color: slategray;
+  background: slategray;
+}
+
+.nb-theme-cosmic nb-sidebar .scrollable{
+  padding: 0;
+}
+
+.nb-theme-default nb-sidebar .scrollable{
+  padding: 0;
+}
+
+.nb-theme-dark nb-sidebar .scrollable{
+  padding: 0;
+}
+
+.nb-theme-cosmic nb-sidebar.compacted {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+}
+
+.nb-theme-default nb-sidebar.compacted {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+}
+
+.nb-theme-dark nb-sidebar.compacted {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+}
+
+.nb-theme-cosmic nb-sidebar.compacted .main-container {
+    width: 5rem;
+}
+
+.nb-theme-default nb-sidebar.compacted .main-container {
+    width: 5rem;
+}
+
+.nb-theme-dark nb-sidebar.compacted .main-container {
+    width: 5rem;
+}
+

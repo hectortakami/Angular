@@ -1,0 +1,115 @@
+<div *ngIf="isSocialActivated || isSettingsActivated" class="container optionsContainer mb-3 mt-0 animated fadeInUp">
+  <div *ngIf="isSocialActivated">
+
+    <button bButton nbButton hero status="basic" size="medium" shape="round" class="navButton animated rotateInUpLeft">
+      <i class="fab fa-github"></i>
+    </button>
+
+    <button nbButton nbButton hero status="basic" size="medium" shape="round" class="navButton animated fadeInUp">
+      <i class="fab fa-linkedin-in"></i>
+    </button>
+
+    <button nbButton nbButton hero status="basic" size="medium" shape="round"
+      class="navButton animated rotateInUpRight">
+      <i class="fab fa-facebook-f"></i>
+    </button>
+
+  </div>
+
+  <div *ngIf="isSettingsActivated">
+    <button nbTooltip="{{ 'langButton' | translate }}" nbTooltipPlacement="left" nbButton hero status="info"
+      size="medium" shape="round" (click)="changeLanguage()" class="navButton animated fadeInUp">
+      {{ language }}
+    </button>
+
+    <button *ngIf="theme === 'Cosmic'" nbTooltip="{{ theme }} Mode" nbTooltipPlacement="top" nbButton hero
+      status="primary" size="medium" shape="round" (click)="changeTheme()" class="navButton animated fadeInUp">
+      <i class="fas fa-meteor"></i>
+    </button>
+    <button *ngIf="theme === 'Dark'" nbTooltip="{{ theme }} Mode" nbTooltipPlacement="top" nbButton hero
+      status="primary" size="medium" shape="round" (click)="changeTheme()" class="navButton animated fadeInUp">
+      <i class="fas fa-cloud-moon"></i>
+    </button>
+    <button *ngIf="theme === 'Light'" nbTooltip="{{ theme }} Mode" nbTooltipPlacement="top" nbButton hero
+      status="warning" size="medium" shape="round" (click)="changeTheme()" class="navButton animated fadeInUp">
+      <i class="fas fa-sun"></i>
+    </button>
+  </div>
+
+</div>
+
+<div class="container navContainer">
+  <button [routerLink]="['/profile']" routerLinkActive="active" nbTooltip="{{ 'resumeButton' | translate }}" nbTooltipPlacement="right" nbButton nbButton hero status="info"
+    size="medium" shape="round" class="navButton">
+    <i class="fas fa-user-graduate"></i>
+  </button>
+
+  <button [routerLink]="['/projects']" routerLinkActive="active" nbTooltip="{{ 'projButton' | translate }}" nbTooltipPlacement="right" nbButton nbButton hero status="success"
+    size="medium" shape="round" class="navButton">
+    <i class="fas fa-laptop"></i>
+  </button>
+
+  <button nbTooltip="{{ 'certButton' | translate }}" nbTooltipPlacement="right" nbButton nbButton hero status="warning"
+    size="medium" shape="round" class="navButton">
+    <i class="fas fa-award"></i>
+  </button>
+
+  <button nbTooltip="Blog" nbTooltipPlacement="right" nbButton nbButton hero status="danger" size="medium" shape="round"
+    class="navButton">
+    <i class="fas fa-bookmark"></i>
+  </button>
+
+  <hr />
+
+  <button nbTooltip="Github" nbTooltipPlacement="right" nbButton nbButton hero status="basic" size="medium"
+    shape="round" class="navButton disapearOnFooter">
+    <i class="fab fa-github"></i>
+  </button>
+
+  <button nbTooltip="LinkedIn" nbTooltipPlacement="right" nbButton nbButton hero status="basic" size="medium"
+    shape="round" class="navButton disapearOnFooter">
+    <i class="fab fa-linkedin-in"></i>
+  </button>
+
+  <button nbTooltip="Facebook" nbTooltipPlacement="right" nbButton nbButton hero status="basic" size="medium"
+    shape="round" class="navButton disapearOnFooter">
+    <i class="fab fa-facebook-f"></i>
+  </button>
+
+  <hr />
+
+  <button nbTooltip="{{ 'langButton' | translate }}" nbTooltipPlacement="right" nbButton hero status="info"
+    size="medium" shape="round" (click)="changeLanguage()" class="navButton disapearOnFooter animated zoomIn">
+    {{ language }}
+  </button>
+
+  <button *ngIf="theme === 'Cosmic'" nbTooltip="{{ theme }} Mode" nbTooltipPlacement="right" nbButton hero
+    status="primary" size="medium" shape="round" (click)="changeTheme()"
+    class="navButton disapearOnFooter animated zoomIn">
+    <i class="fas fa-meteor"></i>
+  </button>
+  <button *ngIf="theme === 'Dark'" nbTooltip="{{ theme }} Mode" nbTooltipPlacement="right" nbButton hero
+    status="primary" size="medium" shape="round" (click)="changeTheme()"
+    class="navButton disapearOnFooter animated zoomIn">
+    <i class="fas fa-cloud-moon"></i>
+  </button>
+  <button *ngIf="theme === 'Light'" nbTooltip="{{ theme }} Mode" nbTooltipPlacement="right" nbButton hero
+    status="warning" size="medium" shape="round" (click)="changeTheme()"
+    class="navButton disapearOnFooter animated zoomIn">
+    <i class="fas fa-sun"></i>
+  </button>
+
+  <!-- Small Screen Buttons -->
+  <button nbButton nbButton hero status="basic" size="medium" shape="round"
+    class="navButton disapearOnSidebar disapearOnXS" (click)="activateMoreOptions('social')">
+    <span *ngIf="!isSocialActivated"> <i class="fas fa-user-friends animated fadeInDown"></i> </span>
+    <span *ngIf="isSocialActivated"> <i class="fas fa-times animated fadeInUp"></i> </span>
+  </button>
+
+  <button nbButton nbButton hero status="primary" size="medium" shape="round" class="navButton disapearOnSidebar"
+    (click)="activateMoreOptions('settings')">
+    <i *ngIf="!isSettingsActivated" class="fas fa-cog animated fadeInDown"></i>
+    <span *ngIf="isSettingsActivated"> <i class="fas fa-times animated fadeInUp"></i> </span>
+  </button>
+
+</div>

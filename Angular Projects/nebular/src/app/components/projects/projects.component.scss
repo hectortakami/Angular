@@ -1,0 +1,134 @@
+@import "../../../themes.scss";
+
+.language-logo {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0.5rem 0.5rem;
+  transition: width 0.125s, height 0.125s, transform 0.25s;
+}
+
+.language-logo:hover {
+  transform: scale(1.5);
+}
+
+.badge:hover {
+  opacity: 100%;
+}
+
+.badge-se {
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem;
+  background-color: #17a2b8;
+  font-size: 1rem;
+  color: white;
+}
+
+.badge-sd {
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem;
+  background-color: #28a745;
+  font-size: 1rem;
+  color: white;
+}
+
+.badge-cs {
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem;
+  background-color: #9e70e6;
+  font-size: 1rem;
+  color: white;
+}
+
+.badge-ml {
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem;
+  background-color: #f09245;
+  font-size: 1rem;
+  color: white;
+}
+
+.badge-gd {
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem;
+  background-color: #f0e872;
+  font-size: 1rem;
+  color: rgb(79, 79, 79);
+}
+
+.badge-nm {
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem;
+  background-color: #d5584f;
+  font-size: 1rem;
+  color: white;
+}
+
+.badge-wd {
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem;
+  background-color: #68686a;
+  font-size: 1rem;
+  color: white;
+}
+
+.badge-md {
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem;
+  background-color: #4584f0;
+  font-size: 1rem;
+  color: white;
+}
+
+// Large Screens
+@media all and (min-width: 768px) {
+  .card-project {
+    max-width: 49%;
+    margin-bottom: 2rem;
+  }
+}
+
+// Extra Small Screens
+@media all and (max-width: 320px) {
+}
+
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: 0.5;
+  &:before {
+    content: "";
+    // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+  }
+  &:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+
+    padding: 0 0.5em;
+    line-height: 1.5em;
+    // this is really the only tricky part, you need to specify the background color of the container element...
+    color: #818078;
+    background-color: #323259;
+  }
+  .card-col {
+    flex: 1 0 calc(50% - 0.25rem);
+    margin: 0 0rem;
+  }
+  .card-row {
+    display: flex;
+    margin: 0 -0.5rem;
+  }
+}

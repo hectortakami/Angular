@@ -1,0 +1,20 @@
+<nb-layout>
+
+    <nb-sidebar class="d-none d-md-block" state="compacted">
+        <app-navbar> </app-navbar>
+    </nb-sidebar>
+
+    <nb-layout-column class="mainCointainer">
+        <router-outlet></router-outlet>
+    </nb-layout-column>
+
+
+    <!-- class="d-sm-block d-md-none"  -->
+    <nb-layout-footer class="d-md-none footerContainer">
+        <div class="container">
+            <app-navbar> </app-navbar>
+        </div>
+
+    </nb-layout-footer>
+
+</nb-layout>

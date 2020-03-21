@@ -1,0 +1,19 @@
+/* Large screens */
+@media only screen and (min-width: 600px) {
+    .mainCointainer{
+        margin-bottom: 0;
+    }
+}
+
+
+/* Small Screens */
+@media only screen and (max-width: 600px) {
+    .mainCointainer{
+        margin-bottom: 6rem;
+    }
+    .footerContainer{
+        width: 100%; 
+        position: fixed; 
+        bottom: 0;
+    }
+}

@@ -1,0 +1,26 @@
+@import "~@nebular/theme/styles/theming";
+@import "~@nebular/theme/styles/themes/cosmic";
+@import "~@nebular/theme/styles/themes/dark";
+@import "~@nebular/theme/styles/themes/default";
+
+$nb-themes: nb-register-theme(
+  (
+    background-color: #323259
+  ),
+  cosmic,
+  cosmic
+);
+$nb-themes: nb-register-theme(
+  (
+    background-color: #222b45
+  ),
+  dark,
+  dark
+);
+$nb-themes: nb-register-theme(
+  (
+    background-color: #ffffff
+  ),
+  default,
+  default
+);
