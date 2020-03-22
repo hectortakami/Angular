@@ -1,0 +1,71 @@
+<mat-card>
+  <div class="row">
+    <div class="col-md-5">
+      <mat-card class="mb-3">
+        <mat-card-header>
+          <mat-card-title>Ngif</mat-card-title>
+          <mat-card-subtitle>*ngIf="condition"</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="px-3">
+          A structural directive that conditionally includes a template based on
+          the value of an expression coerced to Boolean. When the expression
+          evaluates to true, Angular renders the template provided in a then
+          clause, and when false or null, Angular renders the template provided
+          in an optional else clause. The default template for the else clause
+          is blank.
+        </mat-card-content>
+        <mat-card-actions class="text-right">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="changeActive(true)"
+          >
+            Show Image
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="changeActive(false)"
+          >
+            Remove Image
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      <mat-card *ngIf="isActive">
+        <img
+          mat-card-image
+          src="https://images.squarespace-cdn.com/content/v1/55a2bffae4b037baec79f96e/1522585429159-Y9PILDV0QNVLP94B5ZMW/ke17ZwdGBToddI8pDm48kGDpvalPb1SqHoCn1hwN0Y57gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QHyNOqBUUEtDDsRWrJLTmQPoRzxSr1hzN-vPBHt7YyLLXgctAyUJRqJUUGWVDK_ZzIgvsybGcZEPqUYiXY8im/Norbert+colorful+tie.jpg"
+        />
+      </mat-card>
+    </div>
+    <div class="col-md-7">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>NgForOf</mat-card-title>
+          <mat-card-subtitle
+            >*ngFor="let item of items; index as i;"</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-card-content class="px-3">
+          The ngForOf directive is generally used in the shorthand form *ngFor.
+          In this form, the template to be rendered for each iteration is the
+          content of an anchor element containing the directive.
+        </mat-card-content>
+      </mat-card>
+      <mat-card class="mt-3 p-0">
+        <mat-card-content class="m-0 p-0">
+          <mat-toolbar color="warn">Dog breeds list</mat-toolbar>
+
+          <mat-list role="list">
+            <mat-list-item
+              *ngFor="let dog of dogs; let i = index"
+              role="listitem"
+            >
+              <h6>{{ i + 1 }}.- {{ dog }}</h6>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</mat-card>

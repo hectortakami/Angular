@@ -1,0 +1,9 @@
+----------------------------------------------------------------------------------------
+
+- Remove browser outline (when component is clicked)
+
+    button:focus {
+      outline: 0;
+    }
+
+    

@@ -1,0 +1,137 @@
+----------------------------------------------------------------------------------------
+
+JavaScript Problems (before ES6)
+
+- Un-strict variable typing (no int, string, bool)
+- Non existing static methods
+- Classes and modules
+- Autocomplete of variables and run-time error detection (while writing code)
+
+----------------------------------------------------------------------------------------
+
+Compile any TypeScript .ts extention to .js manually
+
+> tsc < file .ts >
+
+----------------------------------------------------------------------------------------
+
+TypeScript Variables
+
+[ X ] var = It's a dynamic assignation for memory, global scope and can be overwritten.
+
+[ √ ] let = Defines a LOCAL SCOPE variable assignment in memory.
+[ √ ] const = Defines an UN-CHANGABLE variable in memory.
+They occupied less memory because they don't have operations assigned.
+
+- string < '' | "" >
+- number < 1 | 1.2 | -12.5 >
+- boolean < true | false >
+- any < string | number | boolean | Date > NOT used in the best practices of ES6+
+
+Literal Template : `${variable}` ( used with `back-ticks` no 'single-quotes' )
+
+----------------------------------------------------------------------------------------
+
+Function Paramenters
+
+- Mandatory Params
+  -> function foo( input: type ) { }
+
+- Optional Params
+  -> function foo( input?: type ) { }
+
+- Default Params
+  -> function foo( input: string = 'default' ) { }
+
+----------------------------------------------------------------------------------------
+
+Arrow Functions
+
+                        params       return type
+const sumNum = (a: number, b: number): number => a + b;
+
+                equals to
+
+const sumNum = function(a: number, b: number) {
+return a + b;
+}
+
+Note: The arrow functions DO NOT modify the 'this' scope, they can be run as ANONYMOUS FUNCTIONS
+
+----------------------------------------------------------------------------------------
+
+Object & Array Destructuring
+
+const myObject = {          
+  name: 'Peter Parker',           const myArray: string[] = ['Thor', 'IronMan', 'Hulk']
+  alias: 'Spider-man'
+} 
+
+- As variables: 
+  -> const {name, alias} = myObject;
+  -> const [ god, billionaire, smash ] = myArray   (if we don't need any value just leave a space respecting the order [ , , smash ])
+
+- As function params:
+  -> const myFunction = ( { name, alias }: myObject<Type> ) => {}
+  -> const myFunction = ( [ god, billionaire, smash ]: myArray[<Type>] ) => {}
+
+----------------------------------------------------------------------------------------
+
+Promises (Async & Await)
+
+const myPromiseFunc = (): Promise<RESOLVE_TYPE> => {
+  return new Promise( ( resolve, reject ) => {
+    < Here goes all the ASYNC requests >
+  });
+}
+
+myPromiseFunc .then( success  => < Here goes the implementation after RESOLVE the AWAIT request successfully > )
+              .catch( error   => < Here goes the implementation if the request is REJECTED > );
+
+----------------------------------------------------------------------------------------
+
+Interfaces & Classes
+
+* Defining an Interface & a Class 
+
+    ->  interface Hero {              
+          name: string;
+          alias: string;
+          staminaPoints?: number;     // By adding '?' it convert the property 'staminaPoints'
+        }                                to something OPTIONAL to implement
+
+    ->  class Avenger { 
+          constructor(  private hero: Hero ,                    // Mandatory init
+                        private location: string,               // Mandatory init
+                        private since?: Date,                   // Optional init
+                        private activeMember: boolean = true    // Default init
+                      ){}
+
+
+* Implementing an Interface & a Class
+
+    ->  const newHero: Hero = {       
+          name: 'Stephen Strange',
+          alias: 'Doctor Strange',
+        }
+
+    ->  const newAvenger: Avenger = new Avenger( newHero, 'New York' );
+
+----------------------------------------------------------------------------------------
+
+Decorators
+
+function FooDecorator() { // Extra methods }
+
+@FooDecorator
+class MyClass { // TODO }
+
+
+Expands the properties and functionalities of a class by adding it before,
+the class definition. ( Similar to inheritance )
+
+Note: The main difference with 'extends' is that we don't need to implement 
+      the other class methods while adding functions avoiding the complexity
+      and keeping the modularity.
+
+----------------------------------------------------------------------------------------
