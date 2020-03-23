@@ -1,0 +1,40 @@
+<div class="row mt-3 d-flex justify-content-center align-items-center">
+  <div class="col-12 col-md-4" *ngFor="let pokemon of pokemons">
+    <nb-card size="tiny" accent="success" class="animated fadeIn">
+      <nb-card-header class="d-flex justify-content-left align-items-center">
+        <img
+          src="../../../assets/icons/pokeball.svg"
+          class="img-fluid rounded-circle"
+          alt=""
+          style="width: 1.5rem;"
+        />
+        <h5 class="ml-2">{{ pokemon.name }}</h5>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-4">
+            <img
+              src="{{ pokemon.icon }}"
+              class="img-fluid"
+              alt=""
+              style="width: 7.5rem; height: 7.5rem;"
+            />
+          </div>
+          <div class="col-8 text-right">
+            <p>
+              {{ pokemon.description }}
+            </p>
+
+            <!-- Redirecting with parameters -->
+            <!-- [routerLink]="['/about', pokemon.name]" -->
+
+            <!-- Redirecting with function in the component -->
+            <a nbButton (click)="redirectPokemonPage(pokemon.name)">
+              {{ pokemon.name }} Info
+            </a>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

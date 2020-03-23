@@ -1,0 +1,53 @@
+<div class="row mt-3 d-flex justify-content-center align-items-center">
+  <nb-card accent="primary" class="col-12 col-md-9 animated fadeIn fast">
+    <nb-card-header class="d-flex justify-content-between">
+      <a [routerLink]="['/pokedex']" nbButton status="primary" shape="round">
+        <nb-icon icon="arrow-ios-back-outline"></nb-icon>
+      </a>
+      <a href="{{ pokemonData.pokewiki }}" nbButton outline status="info">
+        Go to Pokemon Wiki
+      </a>
+    </nb-card-header>
+    <nb-card-body>
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-12 col-md-3">
+          <img src="{{ pokemonData.icon }}" class="img-fluid" alt="" />
+          <h4 class="text-center">{{ pokemonData.name }}</h4>
+          <hr class="d-sm-block d-md-none" />
+        </div>
+        <div class="col-12 col-md-9">
+          <h5>Pokemon Biology</h5>
+          <p>
+            {{ pokemonData.description }}
+          </p>
+        </div>
+      </div>
+      <div class="text-right">
+        <span *ngFor="let type of pokemonData.types">
+          <span *ngIf="type == 'grass'" class="badge badge-pill badge-success">
+            Grass
+          </span>
+          <span *ngIf="type == 'fire'" class="badge badge-pill badge-danger">
+            Fire
+          </span>
+          <span
+            *ngIf="type == 'electric'"
+            class="badge badge-pill badge-warning"
+          >
+            Electric
+          </span>
+          <span *ngIf="type == 'water'" class="badge badge-pill badge-info">
+            Water
+          </span>
+          <span *ngIf="type == 'normal'" class="badge badge-pill badge-light">
+            Normal
+          </span>
+          <span *ngIf="type == 'poisson'" class="badge badge-pill badge-dark">
+            Poisson
+          </span>
+        </span>
+      </div>
+    </nb-card-body>
+    <nb-card-footer> </nb-card-footer>
+  </nb-card>
+</div>
