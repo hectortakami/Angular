@@ -18,6 +18,12 @@ export class NavbarComponent implements OnInit {
       route: "/pokedex",
       icon: "radio-button-on-outline",
       responsive: true
+    },
+    {
+      title: "Search",
+      route: "/search",
+      icon: "search-outline",
+      responsive: true
     }
   ];
   constructor() {}

@@ -13,7 +13,8 @@ import {
   NbInputModule,
   NbButtonModule,
   NbRouteTabsetModule,
-  NbIconModule
+  NbIconModule,
+  NbAlertModule
 } from "@nebular/theme";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
 import { NavbarComponent } from "./components/shared/navbar/navbar.component";
@@ -25,6 +26,7 @@ import { PokemonsComponent } from "./components/pokemons/pokemons.component";
 
 // SERVICES
 import { PokedataService } from "./services/pokedata.service";
+import { SearchComponent } from "./components/search/search.component";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { PokedataService } from "./services/pokedata.service";
     NavbarComponent,
     HomeComponent,
     AboutComponent,
-    PokemonsComponent
+    PokemonsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { PokedataService } from "./services/pokedata.service";
     NbInputModule,
     NbButtonModule,
     NbRouteTabsetModule,
-    NbIconModule
+    NbIconModule,
+    NbAlertModule
   ],
   providers: [PokedataService],
   bootstrap: [AppComponent]

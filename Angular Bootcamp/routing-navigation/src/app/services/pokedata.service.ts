@@ -70,6 +70,17 @@ export class PokedataService {
     }
     return null;
   }
+
+  public retreiveSearch(searchTerm: string): Pokemon[] {
+    let searchResults: Pokemon[] = [];
+    this.getPokemons().forEach(pokemon => {
+      let pokemonName = pokemon.name.toLowerCase();
+      if (pokemonName.includes(searchTerm)) {
+        searchResults.push(pokemon);
+      }
+    });
+    return searchResults;
+  }
 }
 
 export interface Pokemon {

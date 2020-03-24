@@ -1,9 +1,0 @@
-----------------------------------------------------------------------------------------
-
-- Remove browser outline (when any component is clicked)
-
-    :focus {
-      outline: 0;
-    }
-
-    
