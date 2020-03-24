@@ -1,6 +1,6 @@
-# Angular
-TypeScript + HTML + CSS toolset for building web based applications. Framework development. 
 # Angular 9+ Cheat Sheet
+TypeScript + HTML + CSS toolset for building web based applications. Framework development. 
+
 
 ## Commands
 
