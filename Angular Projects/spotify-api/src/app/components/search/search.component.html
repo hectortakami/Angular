@@ -1,0 +1,36 @@
+<nb-card class=" mt-5 animated fadeIn fast">
+  <nb-card-header class="d-flex justify-content-end align-items-center">
+    <h3>Search by Artist</h3>
+    <nb-icon
+      icon="search-outline"
+      style="font-size: 2rem;"
+      class="ml-2"
+    ></nb-icon>
+  </nb-card-header>
+  <nb-card-body class="d-flex justify-content-center align-items-center">
+    <div class="col-10">
+      <input
+        type="text"
+        nbInput
+        shape="round"
+        status="success"
+        placeholder="Search artist..."
+        #searchInput
+        fullWidth
+        (keyup)="searchInSpotify(searchInput.value)"
+      />
+    </div>
+
+    <button nbButton outline status="success" shape="round">
+      <nb-icon icon="search-outline"></nb-icon>
+      <span class="d-none d-md-inline">Search</span>
+    </button>
+  </nb-card-body>
+</nb-card>
+
+<app-loading *ngIf="loading"></app-loading>
+
+<app-artist-card
+  [artists]="artists"
+  *ngIf="searchInput.value.length >= 1"
+></app-artist-card>

@@ -1,0 +1,69 @@
+<app-loading class="mt-5" *ngIf="loadingArtist"></app-loading>
+
+<nb-card *ngIf="!loadingArtist" class="mt-5 animated fadeIn fast">
+  <nb-card-header class="d-flex flex-row align-items-center">
+    <img
+      src="{{ artistData['images']['0']['url'] }}"
+      class="img-fluid rounded-circle"
+      alt=""
+      style="height: 5rem; width: 5rem;"
+    />
+    <div class="d-flex flex-column ml-5">
+      <h4>{{ artistData.name }}</h4>
+      <a
+        href="{{ artistData.external_urls.spotify }}"
+        nbButton
+        outline
+        fullWidth
+        status="success"
+        size="small"
+        class="py-1 mt-1"
+      >
+        View Artist <i class="fa fa-spotify fa-2x ml-3"></i>
+      </a>
+    </div>
+
+    <h4 style="margin-left: auto;" class="d-none d-md-inline">
+      <i class="fas fa-compact-disc mr-2"></i>Top Tracks
+    </h4>
+  </nb-card-header>
+</nb-card>
+
+<app-loading class="mt-5" *ngIf="loadingTracks"></app-loading>
+
+<nb-card *ngIf="!loadingTracks" class="animated fadeIn slow">
+  <nb-card-header
+    class="d-none d-md-flex flex-row justify-content-between m-0 px-4"
+  >
+    <div class="col-1 text-left"><h4>#</h4></div>
+    <div class="col-4 text-left"><h4>Album</h4></div>
+    <div class="col-3 text-left"><h4>Title</h4></div>
+    <div class="col-4 text-center">
+      <h4>Song Preview</h4>
+    </div>
+  </nb-card-header>
+  <nb-card-body class="p-0 p-md-3">
+    <nb-list class="p-1 p-md-3">
+      <nb-list-item
+        *ngFor="let track of artistTracks; let i = index"
+        class="d-flex flex-row justify-content-between px-0 p-md-3"
+      >
+        <h5 class="d-none d-md-block col-1">{{ i + 1 }}</h5>
+        <h6 class="d-none d-md-block col-4">{{ track.album.name }}</h6>
+        <h6 class="d-none d-md-block col-3">
+          <em>{{ track.name }}</em>
+        </h6>
+        <iframe
+          [src]="track.id | sanitize"
+          width="300"
+          height="80"
+          frameborder="0"
+          allowtransparency="true"
+          allow="encrypted-media"
+          style="margin-left: auto;"
+          class="col-12 col-md-4 animated fadeIn slow"
+        ></iframe>
+      </nb-list-item>
+    </nb-list>
+  </nb-card-body>
+</nb-card>

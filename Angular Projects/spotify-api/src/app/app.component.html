@@ -1,0 +1,21 @@
+<nb-layout>
+  <nb-layout-header fixed>
+    <div class="d-flex align-items-center justify-content-center">
+      <img
+        src="../assets/spotify.png"
+        class="img-fluid rounded-circle mr-3"
+        alt="spotify.png"
+        style="width: 2rem;"
+      />
+      <h3 class="mt-2">Spotify API</h3>
+    </div>
+  </nb-layout-header>
+  <nb-layout-column>
+    <app-navbar></app-navbar>
+
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+  <nb-layout-footer fixed>
+    <p>&copy; {{ year }} Hector M. Takami</p>
+  </nb-layout-footer>
+</nb-layout>

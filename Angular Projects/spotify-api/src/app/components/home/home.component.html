@@ -1,0 +1,17 @@
+<nb-alert status="danger" class=" mt-5" *ngIf="errorMsg.length > 0">
+  Error. {{ errorMsg }}! Please verify your token.
+</nb-alert>
+
+<nb-card class=" mt-5 animated fadeIn fast" *ngIf="errorMsg.length == 0">
+  <nb-card-header class="d-flex justify-content-end align-items-center">
+    <h3>New Album Releases</h3>
+    <nb-icon
+      icon="music-outline"
+      style="font-size: 2rem;"
+      class="ml-2"
+    ></nb-icon>
+  </nb-card-header>
+</nb-card>
+
+<app-loading *ngIf="loading && errorMsg.length == 0"></app-loading>
+<app-artist-card [artists]="newReleases"></app-artist-card>

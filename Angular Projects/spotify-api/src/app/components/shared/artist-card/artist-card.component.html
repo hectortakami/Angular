@@ -1,0 +1,23 @@
+<div class="row d-flex justify-content-center align-items-center mt-3">
+  <div class="col-12 col-md-3" *ngFor="let artist of artists">
+    <nb-card class="animated fadeIn slow" (click)="redirectArtist(artist)">
+      <nb-card-body style="padding: 0 0.0625rem;">
+        <img
+          *ngIf="artist['images'].length > 0"
+          src="{{ artist['images']['0']['url'] }}"
+          class="img-fluid rounded-top"
+          alt=""
+        />
+        <img
+          *ngIf="artist['images'].length == 0"
+          src="https://wololosound.com/wp-content/uploads/spotify-square.png"
+          class="img-fluid rounded-top"
+          alt=""
+        />
+      </nb-card-body>
+      <nb-card-footer>
+        <h6>{{ artist["name"] }}</h6>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>
