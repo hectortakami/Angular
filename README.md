@@ -1,6 +1,8 @@
-# Angular 9+ Cheat Sheet
-TypeScript + HTML + CSS toolset for building web based applications. Framework development. 
+# Angular
 
+TypeScript + HTML + CSS toolset for building web based applications. Framework development.
+
+# Angular 9+ Cheat Sheet
 
 ## Commands
 
@@ -298,3 +300,69 @@ https://angular.io/guide/pipes
     <p>{{ new Date() | date: "dd-MMMM":'':'es' }}     </p>
     <!-- Note: Don´t miss that an empty slot ''       is required between the format and the      language code
     ```
+
+## AJAX HTTP Requests
+
+https://angular.io/guide/http
+
+_app.module.ts_
+
+```typescript
+import { HttpClientModule } from "@angular/common/http";
+```
+
+```typescript
+imports: [
+  BrowserModule,
+  // import HttpClientModule after BrowserModule.
+  HttpClientModule
+];
+```
+
+_http.service.ts_
+
+```typescript
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+```
+
+```typescript
+
+// OPTIONAL, only when header is needed
+myHeaders = new HttpHeaders({
+    // Here goes all headers to send with the HTTP Request body
+    // Ex.
+    // Authorization: < API_TOKEN >
+  });
+
+constructor( private http: HttpClient ) {  }
+
+// Any function to aperate the REST Calls
+operateAPI(){
+  this.http.get("<API_URL>", { headers: myHeaders })
+      .subscribe(api_response_data => {
+        // Operations with API data retreived
+      }, error => {
+        // Error handling when no response is send
+      }
+    );
+}
+```
+
+#### Map Pipe (RJXS Operator)
+
+```typescript
+import { map } from "rxjs/operators";
+
+operateAPI() {
+    this.http
+      .get("<API_URL>", { headers: myHeaders })
+      // Filters the data received from API before return it
+      .pipe(
+        map(
+          data =>
+          // Data Filtering
+          // Ex. data["items"] -> Filters the response only returning the content in data.items
+          ));
+
+  }
+```
