@@ -66,6 +66,46 @@ ng serve -o
 ng generate [ component | service | pipe ] < path >
 ```
 
+## Attribute Directives
+
+- ##### \*ngStyle
+  https://angular.io/api/common/NgStyle
+
+```html
+<div [ngStyle]="styleObj"></div>
+```
+
+```javascript
+myColor = "blue";
+
+styleObj = {
+  "font-size": "10rem",
+  color: myColor,
+  "margin-bottom": "1.5rem"
+};
+```
+
+- ##### \*ngClass
+  https://angular.io/api/common/NgClass
+
+```html
+<div [ngClass]="['alert', myClass, ... ]"></div>
+```
+
+```html
+<div
+  [ngClass]="{ 'text-center': classObj.center, 'text-right': classObj.right }"
+></div>
+```
+
+```javascript
+myClass = "alert-primary";
+classObj = {
+  center: true,
+  right: false
+};
+```
+
 ## Structural Directives
 
 https://angular.io/guide/structural-directives#structural-directives
@@ -75,6 +115,10 @@ https://angular.io/guide/structural-directives#structural-directives
   <div *ngIf="<boolean expression>"></div>
   ```
 - ##### \*ngForOf
+  ```html
+  <li *ngFor="let item in collection; let i=index;"></li>
+  ```
+- ##### \*ngSwitch
   ```html
   <li *ngFor="let item in collection; let i=index;"></li>
   ```

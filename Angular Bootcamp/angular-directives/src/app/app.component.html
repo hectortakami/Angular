@@ -1,0 +1,263 @@
+<nb-layout>
+  <nb-layout-header fixed>
+    <h3>Angular Directives</h3>
+  </nb-layout-header>
+
+  <nb-layout-column>
+    <!-- Attribute Directives -->
+    <nb-card>
+      <nb-card-header>
+        <h5>Attribute Directives</h5>
+      </nb-card-header>
+    </nb-card>
+    <div class="row">
+      <!-- NgStyle Card -->
+      <div class="col-12 col-md-6">
+        <nb-card size="medium">
+          <nb-card-header>
+            <h5>NgStyle</h5>
+            <!--  -->
+          </nb-card-header>
+          <nb-card-body>
+            <div class="row">
+              <div class="col-12 col-md-6 text-justify">
+                <p>
+                  NgStyle is an attribute directive that updates styles for the
+                  containing HTML element. <br />
+                  <br />
+                  Sets one or more style properties, specified as
+                  colon-separated key-value pairs. The key is a style name, with
+                  an optional . <br />
+                  <br />
+                  The value is an expression to be evaluated. The resulting
+                  non-null value, expressed in the given unit, is assigned to
+                  the given style property. If the result of evaluation is null,
+                  the corresponding style is removed.
+                </p>
+              </div>
+              <div
+                class="col-12 col-md-6 d-flex justify-content-center align-items-center flex-column"
+              >
+                <!-- We define the style on the fly using the 'styleObj'  -->
+                <nb-icon icon="globe-2-outline" [ngStyle]="styleObj"></nb-icon>
+
+                <button nbButton (click)="changeStyle()" class="my-4">
+                  Switch style
+                  <nb-icon icon="color-palette-outline"></nb-icon>
+                </button>
+              </div>
+            </div>
+          </nb-card-body>
+          <nb-card-footer class="text-center">
+            <strong> styleObj = {{ styleObj | json }} </strong>
+          </nb-card-footer>
+        </nb-card>
+      </div>
+
+      <!-- NgClass Card -->
+      <div class="col-12 col-md-6">
+        <nb-card size="medium">
+          <nb-card-header>
+            <h5>NgClass</h5>
+          </nb-card-header>
+          <nb-card-body>
+            <p>
+              Adds and removes CSS classes on an HTML element. <br /><br />
+              The CSS classes are updated as follows, depending on the type of
+              the expression evaluation:
+            </p>
+            <ul>
+              <li>
+                string - the CSS classes listed in the string (space delimited)
+                are added
+              </li>
+              <li>
+                Array - the CSS classes declared as Array elements are added
+              </li>
+              <li>
+                Object - keys are CSS classes that get added when the expression
+                given in the value evaluates to a truthy value, otherwise they
+                are removed
+              </li>
+            </ul>
+            <div
+              class="row d-flex justify-content-center align-items-center mt-5"
+            >
+              <div [ngClass]="classArr" class="col-10 col-md-7 m-0">
+                <strong>My class is '{{ classArr[1] }}'</strong>
+              </div>
+              <button
+                nbButton
+                (click)="changeClass()"
+                class="col-6 col-md-3 mt-3 mt-md-0 ml-0 ml-md-3"
+              >
+                Switch class
+              </button>
+            </div>
+          </nb-card-body>
+          <nb-card-footer class="text-center">
+            <strong>
+              classArr = [ {{ classArr[0] }}, {{ classArr[2] }},
+              {{ classArr[1] }} ]</strong
+            >
+          </nb-card-footer>
+        </nb-card>
+      </div>
+    </div>
+
+    <nb-card>
+      <nb-card-header>
+        <h5>Structural Directives</h5>
+      </nb-card-header>
+    </nb-card>
+    <div class="row">
+      <!-- NgIf Card -->
+      <div class="col-md-4">
+        <nb-card size="medium">
+          <nb-card-header>
+            <h5>NgIf</h5>
+          </nb-card-header>
+          <nb-card-body>
+            <p>
+              A structural directive that conditionally includes a template
+              based on the value of an expression coerced to Boolean. When the
+              expression evaluates to true, Angular renders the template
+              provided in a then clause, and when false or null, Angular renders
+              the template provided in an optional else clause. The default
+              template for the else clause is blank.
+            </p>
+            <hr />
+            <div class="text-center">
+              <img
+                *ngIf="showImage"
+                src="../assets/pokemon.png"
+                class="img-fluid animated fadeIn slow"
+                alt="Poke Image"
+                style="height: 6rem;"
+              />
+              <img
+                *ngIf="!showImage"
+                src="../assets/pokeball.png"
+                class="img-fluid animated fadeIn slow"
+                alt="Poke Image"
+                style="height: 6rem;"
+              />
+            </div>
+            <button
+              nbButton
+              hero
+              status="warning"
+              size="medium"
+              class="btn btn-block mt-3"
+              (click)="showImage = !showImage"
+            >
+              Free / Catch Pokemon
+            </button>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <!-- NgFor Card -->
+      <div class="col-md-4">
+        <nb-card size="medium">
+          <nb-card-header>
+            <h5>NgFor</h5>
+          </nb-card-header>
+          <nb-card-body>
+            <p>
+              A structural directive that renders a template for each item in a
+              collection. The directive is placed on an element, which becomes
+              the parent of the cloned templates.
+            </p>
+            <hr />
+            <h6 class="mt-2 mb-3">Pokemon List</h6>
+            <ul>
+              <li
+                *ngFor="let pokemon of pokemons"
+                style="font-size: 1rem;"
+                class="mt-1"
+              >
+                <em style="font-size: 1rem;"> {{ pokemon }}</em>
+              </li>
+            </ul>
+          </nb-card-body>
+        </nb-card>
+      </div>
+      <!-- NgSwitch Card -->
+      <div class="col-md-4">
+        <nb-card>
+          <nb-card-header>
+            <h5>NgSwitch</h5>
+          </nb-card-header>
+          <nb-card-body>
+            <p>
+              A structural directive that adds or removes templates (displaying
+              or hiding views) when the next match expression matches the switch
+              expression.
+            </p>
+
+            <span [ngSwitch]="switchValue">
+              <div class="text-center" *ngSwitchCase="1">
+                <img
+                  src="../assets/bullbasaur.png"
+                  class="img-fluid animated fadeIn slow"
+                  alt="Poke Image"
+                  style="height: 6rem;"
+                />
+              </div>
+              <div class="text-center" *ngSwitchCase="2">
+                <img
+                  src="../assets/squirtle.png"
+                  class="img-fluid animated fadeIn slow"
+                  alt="Poke Image"
+                  style="height: 6rem;"
+                />
+              </div>
+              <div class="text-center" *ngSwitchCase="3">
+                <img
+                  src="../assets/charmander.png"
+                  class="img-fluid animated fadeIn slow"
+                  alt="Poke Image"
+                  style="height: 6rem;"
+                />
+              </div>
+            </span>
+            <button
+              (click)="switchPokemon(1)"
+              nbButton
+              hero
+              status="success"
+              size="medium"
+              class="btn btn-block mt-3"
+            >
+              Grass Pokemon
+            </button>
+            <button
+              (click)="switchPokemon(2)"
+              nbButton
+              hero
+              status="info"
+              size="medium"
+              class="btn btn-block mt-3"
+            >
+              Water Pokemon
+            </button>
+            <button
+              (click)="switchPokemon(3)"
+              nbButton
+              hero
+              status="danger"
+              size="medium"
+              class="btn btn-block mt-3"
+            >
+              Fire Pokemon
+            </button>
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>
+    <p>&copy; {{ year }} Hector M. Takami</p>
+  </nb-layout-footer>
+</nb-layout>
