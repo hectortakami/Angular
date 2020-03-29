@@ -1,0 +1,78 @@
+<div class="row d-flex justify-content-center align-items-center mt-4">
+  <div class="col-12 col-md-6">
+    <nb-card class="animated fadeInLeft">
+      <nb-card-header>
+        <h5>Register</h5>
+      </nb-card-header>
+      <nb-card-body>
+        <input
+          class="my-2"
+          type="email"
+          nbInput
+          fullWidth
+          shape="round"
+          required
+          placeholder="Email"
+          #useremail
+        />
+        <input
+          class="my-2"
+          type="text"
+          nbInput
+          fullWidth
+          shape="round"
+          required
+          placeholder="Username"
+          #username
+        />
+        <input
+          class="my-2"
+          type="password"
+          nbInput
+          fullWidth
+          shape="round"
+          required
+          placeholder="Password"
+          #userpassword
+        />
+        <div
+          class="row d-flex justify-content-center align-items-center mt-3 px-2"
+        >
+          <div class="col-6 text-left">
+            <nb-checkbox status="primary" (checkedChange)="toggle($event)"
+              >Remember me</nb-checkbox
+            >
+          </div>
+          <div class="col-6 text-right">
+            <button
+              [routerLink]="['/login']"
+              class="p-0"
+              nbButton
+              ghost
+              status="primary"
+              size="small"
+            >
+              <span class="d-none d-md-inline mr-1">Already register? </span>
+              Login
+            </button>
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <button
+          (click)="
+            registerUser(useremail.value, username.value, userpassword.value)
+          "
+          class="my-2"
+          nbButton
+          fullWidth
+          hero
+          status="primary"
+          size="large"
+        >
+          Create account
+        </button>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>

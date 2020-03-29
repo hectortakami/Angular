@@ -1,0 +1,19 @@
+<div class="row d-flex justify-content-center align-items-center mt-4">
+  <div class="col-12 col-md-9">
+    <nb-card class="animated fadeIn">
+      <nb-card-header class="d-flex justify-content-between align-items-center">
+        <h5>Welcome {{ userData.displayName }}</h5>
+        <button nbButton status="danger" (click)="logout()">
+          Log Out
+        </button>
+      </nb-card-header>
+      <nb-card-body>
+        <pre>
+          <code>
+            {{userData | json}}
+          </code>
+        </pre>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

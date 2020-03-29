@@ -1,0 +1,68 @@
+<div class="row d-flex justify-content-center align-items-center mt-5">
+  <div class="col-12 col-md-6">
+    <nb-card class="animated fadeInRight">
+      <nb-card-header>
+        <h5>Login</h5>
+      </nb-card-header>
+      <nb-card-body>
+        <input
+          class="my-2"
+          type="email"
+          nbInput
+          fullWidth
+          shape="round"
+          placeholder="Email"
+          value="{{ userEmail }}"
+          #useremail
+        />
+        <input
+          class="my-2"
+          type="password"
+          nbInput
+          fullWidth
+          shape="round"
+          placeholder="Password"
+          #userpassword
+        />
+        <div
+          class="row d-flex justify-content-center align-items-center mt-3 px-2"
+        >
+          <div class="col-6 col-md-5 text-left">
+            <nb-checkbox
+              value="{{ rememberUser }}"
+              status="primary"
+              (checkedChange)="toggle($event)"
+              >Remember me</nb-checkbox
+            >
+          </div>
+          <div class="col-6 col-md-7 text-right">
+            <button
+              [routerLink]="['/register']"
+              class="p-0"
+              nbButton
+              ghost
+              status="primary"
+              size="small"
+            >
+              <span class="d-none d-md-inline mr-1">Don't have account?</span>
+              Register
+            </button>
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <button
+          (click)="loginUser(useremail.value, userpassword.value)"
+          class="my-2"
+          nbButton
+          fullWidth
+          hero
+          status="primary"
+          size="large"
+        >
+          Login
+        </button>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>
