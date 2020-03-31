@@ -7,42 +7,34 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
   NbThemeModule,
   NbLayoutModule,
+  NbIconModule,
+  NbListModule,
   NbCardModule,
   NbButtonModule,
-  NbIconModule,
-  NbInputModule,
+  NbSpinnerModule,
   NbAlertModule,
-  NbSelectModule,
-  NbRadioModule,
-  NbListModule
+  NbInputModule
 } from "@nebular/theme";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
-import { TemplateFormComponent } from "./components/template-form/template-form.component";
-import { ReactiveFormComponent } from "./components/reactive-form/reactive-form.component";
-
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
+import { RegisterComponent } from "./components/register/register.component";
+import { ShowComponent } from "./components/show/show.component";
 
 @NgModule({
-  declarations: [AppComponent, TemplateFormComponent, ReactiveFormComponent],
+  declarations: [AppComponent, RegisterComponent, ShowComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NbThemeModule.forRoot({ name: "default" }),
+    NbThemeModule.forRoot({ name: "cosmic" }),
     NbLayoutModule,
     NbEvaIconsModule,
+    NbIconModule,
+    NbListModule,
     NbCardModule,
     NbButtonModule,
-    NbIconModule,
-    NbInputModule,
-    NbRadioModule,
+    NbSpinnerModule,
     NbAlertModule,
-    NbSelectModule,
-    NbListModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
+    NbInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

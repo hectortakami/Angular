@@ -1,0 +1,209 @@
+<nb-card>
+  <nb-card-header>
+    <h5>Reactive Form</h5>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          shape="round"
+          placeholder="First Name"
+          formControlName="firstname"
+          [ngClass]="{
+            'form-control': true,
+            'is-valid': isValid('firstname')[0],
+            'is-invalid': isValid('firstname')[1]
+          }"
+        />
+        <small
+          *ngIf="isValid('firstname')[1]"
+          class="form-text text-danger text-right mr-3"
+        >
+          You need to enter a valid name (5 letters least)
+        </small>
+      </div>
+
+      <div class="form-group">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          shape="round"
+          placeholder="Last Name"
+          formControlName="lastname"
+          [ngClass]="{
+            'form-control': true,
+            'is-valid': isValid('lastname')[0],
+            'is-invalid': isValid('lastname')[1]
+          }"
+        />
+        <small
+          *ngIf="isValid('lastname')[1]"
+          class="form-text text-danger text-right mr-3"
+        >
+          You need to enter a value name (5 letters least)
+        </small>
+      </div>
+
+      <div class="form-group">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          shape="round"
+          placeholder="Email"
+          formControlName="email"
+          [ngClass]="{
+            'form-control': true,
+            'is-valid': isValid('email')[0],
+            'is-invalid': isValid('email')[1]
+          }"
+        />
+        <small
+          *ngIf="isValid('email')[1]"
+          class="form-text text-danger text-right mr-3"
+        >
+          You need to enter a valid email (example@mail.com)
+        </small>
+      </div>
+
+      <div class="form-group" formGroupName="address">
+        <hr />
+        <h6 class="ml-3">Address</h6>
+        <hr />
+        <div class="form-group">
+          <input
+            type="text"
+            id="address"
+            nbInput
+            fullWidth
+            shape="round"
+            placeholder="City"
+            formControlName="city"
+            [ngClass]="{
+              'form-control': true,
+              'is-valid': isValid('address.city')[0],
+              'is-invalid': isValid('address.city')[1]
+            }"
+          />
+          <small
+            *ngIf="isValid('address.city')[1]"
+            class="form-text text-danger text-right mr-3"
+          >
+            You need to enter a city
+          </small>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            id="address"
+            nbInput
+            fullWidth
+            shape="round"
+            placeholder="State"
+            formControlName="state"
+            [ngClass]="{
+              'form-control': true,
+              'is-valid': isValid('address.state')[0],
+              'is-invalid': isValid('address.state')[1]
+            }"
+          />
+          <small
+            *ngIf="isValid('address.state')[1]"
+            class="form-text text-danger text-right mr-3"
+          >
+            You need to enter a state
+          </small>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            id="address"
+            nbInput
+            fullWidth
+            shape="round"
+            placeholder="Zip Code"
+            formControlName="zipcode"
+            [ngClass]="{
+              'form-control': true,
+              'is-valid': isValid('address.zipcode')[0],
+              'is-invalid': isValid('address.zipcode')[1]
+            }"
+          />
+          <small
+            *ngIf="isValid('address.zipcode')[1]"
+            class="form-text text-danger text-right mr-3"
+          >
+            You need to enter a valid zip code (5 numbers)
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group" formArrayName="hobbies">
+        <hr />
+        <div
+          class="row ml-3 mb-3 d-flex justify-content-between align-content-center"
+        >
+          <h6 class="mt-2">Hobbies</h6>
+          <button
+            nbButton
+            status="success"
+            type="button"
+            class="mr-4"
+            (click)="add2FormArray()"
+          >
+            <nb-icon icon="plus-outline"></nb-icon>
+          </button>
+        </div>
+        <nb-list>
+          <nb-list-item
+            *ngFor="let item of formArray.controls; let i = index"
+            class="d-flex justify-content-center align-content-center"
+          >
+            <div class="row d-flex justify-content-center align-content-center">
+              <p class="mt-2">{{ i + 1 }}</p>
+              <div class="col-9">
+                <input
+                  type="text"
+                  nbInput
+                  fullWidth
+                  shape="round"
+                  placeholder="Write something..."
+                  [formControlName]="i"
+                />
+              </div>
+              <div class="col-2 px-1">
+                <button
+                  nbButton
+                  status="danger"
+                  shape="round"
+                  type="button"
+                  (click)="remove2FormArray(i)"
+                >
+                  <nb-icon icon="close-outline"></nb-icon>
+                </button>
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+      </div>
+
+      <hr />
+
+      <button
+        type="submit"
+        nbButton
+        hero
+        status="primary"
+        shape="semi-round"
+        fullWidth
+        size="large"
+      >
+        Save
+      </button>
+    </form>
+  </nb-card-body>
+</nb-card>

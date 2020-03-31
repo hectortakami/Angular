@@ -172,7 +172,9 @@ and keeping the modularity._
 #### Cheat Sheet
 
 - ###### Find if a search term is in our database
+
   _String containing a substring_
+
   ```typescript
   array.forEach(value => {
     // Use ' .includes() ' function
@@ -181,13 +183,51 @@ and keeping the modularity._
     }
   });
   ```
+
 - ###### Verify string as a valid Email
-  _String as email format_
+
+  _String as email format (TS)_
+
   ```typescript
   mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  // [a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$ this RegEx also works
   if ("myString@mail.com".match(mailformat)) {
     return true;
   } else {
     return false;
   }
+  ```
+
+  _Validate it inside the HTML (using a pattern RegEx)_
+
+  ```html
+  <input
+    type="text"
+    name="email"
+    pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+    required
+    #emailField="ngModel"
+  />
+  ```
+
+- ###### Countries Service (commonly used in selectors)
+
+  _countries.service.ts_
+
+  ```typescript
+  getCountries() {
+      // Return SPANISH Speaking Country Array { country name & country code (3    letters)}
+      // You can change the 'lang/<LANGUAGE_CODE>' termination to retreive other language speaking countries
+      return this.http.get("https://restcountries.eu/rest/v2/lang/es").pipe(
+        map((response: any[]) => {
+          // console.log(response) to see the full contries array with all their properties
+          return response.map(countryResponse => {
+            return {
+              country: countryResponse.name,
+              code: countryResponse.alpha3Code
+            };
+          });
+        })
+      );
+    }
   ```

@@ -1,0 +1,131 @@
+<nb-card>
+  <nb-card-header>
+    <h5>Template Form</h5>
+  </nb-card-header>
+  <nb-card-body>
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+      <div class="form-group">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          shape="round"
+          placeholder="First Name"
+          name="firstname"
+          [ngModel]="fields.firstname.value"
+          [ngClass]="{
+            'form-control': true,
+            'is-valid': usernameField.valid && usernameField.touched,
+            'is-invalid': usernameField.invalid && usernameField.touched
+          }"
+          (ngModelChange)="fields.firstname.status = 'basic'"
+          [status]="fields.firstname.status"
+          required
+          minlength="5"
+          #usernameField="ngModel"
+        />
+        <small
+          *ngIf="usernameField.invalid && usernameField.touched"
+          class="form-text text-danger text-right mr-3"
+        >
+          You need to enter a valid name (5 letters least)
+        </small>
+      </div>
+
+      <div class="form-group">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          shape="round"
+          placeholder="Last Name"
+          name="lastname"
+          [ngModel]="fields.lastname.value"
+          [ngClass]="{
+            'form-control': true,
+            'is-valid': userlastField.valid,
+            'is-invalid': userlastField.invalid && userlastField.touched
+          }"
+          (ngModelChange)="fields.lastname.status = 'basic'"
+          [status]="fields.lastname.status"
+          required
+          minlength="5"
+          #userlastField="ngModel"
+        />
+        <small
+          *ngIf="userlastField.invalid && userlastField.touched"
+          class="form-text text-danger text-right mr-3"
+        >
+          You need to enter a valid value (5 letters least)
+        </small>
+      </div>
+
+      <div class="form-group">
+        <input
+          type="text"
+          nbInput
+          fullWidth
+          shape="round"
+          placeholder="Email"
+          name="email"
+          [ngModel]="fields.email.value"
+          pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          [ngClass]="{
+            'form-control': true,
+            'is-valid': emailField.valid,
+            'is-invalid': emailField.invalid && emailField.touched
+          }"
+          (ngModelChange)="fields.email.status = 'basic'"
+          [status]="fields.email.status"
+          required
+          #emailField="ngModel"
+        />
+        <small
+          *ngIf="emailField.invalid && emailField.touched"
+          class="form-text text-danger text-right mr-3"
+        >
+          You need to enter a valid email (example@mail.com)
+        </small>
+      </div>
+
+      <div class="form-group mx-1 text-right">
+        <nb-select
+          name="country"
+          placeholder="Select Country"
+          [ngModel]="fields.countries.value"
+          (ngModelChange)="fields.countries.status = 'basic'"
+          [status]="fields.countries.status"
+          #countryField="ngModel"
+          required
+        >
+          <nb-option
+            *ngFor="let value of countries"
+            value="{{ value.country }}"
+          >
+            ({{ value.code }}) {{ value.country }}
+          </nb-option>
+        </nb-select>
+        <small
+          *ngIf="countryField.invalid && countryField.touched"
+          class="form-text text-danger text-right mr-3"
+        >
+          You need to select a country
+        </small>
+      </div>
+
+      <hr />
+
+      <button
+        type="submit"
+        nbButton
+        hero
+        status="primary"
+        shape="semi-round"
+        fullWidth
+        size="large"
+      >
+        Save
+      </button>
+    </form>
+  </nb-card-body>
+</nb-card>
