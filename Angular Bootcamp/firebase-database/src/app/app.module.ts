@@ -13,14 +13,20 @@ import {
   NbButtonModule,
   NbSpinnerModule,
   NbAlertModule,
-  NbInputModule
+  NbInputModule,
+  NbToastrModule,
+  NbIconConfig
 } from "@nebular/theme";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
-import { RegisterComponent } from "./components/register/register.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { FormularyCrudComponent } from "./components/formulary-crud/formulary-crud.component";
 import { ShowComponent } from "./components/show/show.component";
 
+import { HttpClientModule } from "@angular/common/http";
+const iconConfig: NbIconConfig = { icon: "", pack: "eva" };
+
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, ShowComponent],
+  declarations: [AppComponent, FormularyCrudComponent, ShowComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,7 +40,10 @@ import { ShowComponent } from "./components/show/show.component";
     NbButtonModule,
     NbSpinnerModule,
     NbAlertModule,
-    NbInputModule
+    NbInputModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NbToastrModule.forRoot(iconConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

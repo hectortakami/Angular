@@ -1,1 +1,51 @@
-<p>show works!</p>
+<nb-card>
+  <nb-card-header class="d-flex justify-content-between align-items-center">
+    <h4>List Database</h4>
+    <button nbButton status="success" shape="round" [routerLink]="['/register', 'new']" size="large">
+      <nb-icon icon="plus"></nb-icon>
+    </button>
+  </nb-card-header>
+</nb-card>
+
+<nb-card class="p-0">
+  <nb-card-body class="p-0 m-0" [nbSpinner]="loading" nbSpinnerSize="giant" nbSpinnerStatus="primary">
+    <table class="table table table-striped table-dark table-borderless"
+      style="color: white; background-color:#323259; border: transparent;">
+      <thead>
+        <tr>
+          <th>Firebase ID</th>
+          <th>Pokemon Name</th>
+          <th>Pokemon Type</th>
+          <th>Can Fight?</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pokemon of pokemons; let i = index">
+          <td>{{ pokemon.firebaseID }}</td>
+          <td>{{ pokemon.pokename }}</td>
+          <td>{{ pokemon.poketype }}</td>
+          <td>{{ pokemon.pokestatus }}</td>
+          <td class="d-flex justify-content-around">
+            <button nbButton status="warning" shape="round" [routerLink]="['/register', pokemon.firebaseID]"
+              routerLinkActive="router-link-active">
+              <nb-icon icon="edit-outline"></nb-icon>
+            </button>
+            <button nbButton status="danger" shape="round" (click)="deletePokemon(pokemon, i)">
+              <nb-icon icon="close-outline"></nb-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </nb-card-body>
+</nb-card>
+
+<nb-alert status="primary" *ngIf="pokemons.length <= 0">
+  <h4 class="text-center">
+    No Pokemons register, yet..
+  </h4>
+  <h6 class="text-center">Go catch'em! <img src="../../../assets/pokeball.png" class="img-fluid rounded ml-1 fa-spin"
+      alt="" style="width: 1.5rem; height: 1.5rem;">
+  </h6>
+</nb-alert>

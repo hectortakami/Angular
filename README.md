@@ -1442,3 +1442,90 @@ imports: [
       </small>
     </div>
     ```
+
+## Firebase (Realtime Database)
+
+1. Create Firebase project
+   https://console.firebase.google.com
+2. Select `Start with the test mode`
+3. Navigate `Database > Create Realtime Database > Rules` and verify all permission for I/O are set to true (this permissions allow anyone to read & write, must change in production env)
+
+#### Firebase REST Usage
+
+###### Note: Notice the ```.json``` termintation after calling all the HTTP Request Services, this is a mandatory usage for the API calls.
+
+_firebase.service.ts_
+```typescript
+export class FirebaseService {
+  private firebase = "<FIREBASE_PROJECT_URL>";
+
+  constructor(private http: HttpClient) {}
+
+  // HTTP REQUEST : POST
+  // Returns the FirebaseID when the POST request is submitted
+  create(object: objectModel) {
+    return this.http
+    .post(`${this.firebase}/<COLLECTION>.json`, object)
+    // With this pipe we return the exact same object + the recently created Firebase ID
+    .pipe(
+      map(response => {
+        object.firebaseID = response["name"];
+        return object;
+      })
+    );
+  }
+
+  // HTTP REQUEST : GET
+  // Return the entire collection (no Firebase ID included in the object attributes) 
+  // AS OBJECT
+  readAll() {
+    return this.http
+        .get(`${this.firebase}/<COLLECTION>.json`)
+        // With this pipe we return the entire collection with each element containing it's Firebase ID
+        // AS ARRAY
+        .pipe(
+          map(response => {
+            if (!response) {
+              return [];
+            } else {
+              const firebaseIDs = Object.keys(response); //Retreive all the keys, in this case Firebase IDs
+              const firebaseData = Object.values(response); //Retreive all the properties contained by each key (without the key)
+              for (let i = 0; i < firebaseIDs.length; i++) {
+                firebaseData[i].firebaseID = firebaseIDs[i];
+              }
+              return firebaseData;
+            }
+          })
+        );
+  }
+
+  // HTTP REQUEST : GET
+  // Return an unique object referenced by the Firebase ID
+  readByID(firebaseID: string) {
+    return this.http
+    .get(`${this.firebase}/<COLLECTION>/${firebaseID}.json`);
+  }
+
+  // HTTP REQUEST : PUT
+  // Returns an object with modified properties (updated), but same Firebase ID
+  update(object: ObjectModel) {
+    // Neccesarly pre-processing to remove redundancies using Firebase ID 
+    // while updating an element from database
+    const objectTemp = {
+      ...object
+    };
+    delete objectTemp.firebaseID;
+
+    return this.http.put(
+      `${this.firebase}/<COLLECTION>/${object.firebaseID}.json`,
+      objectTemp
+    );
+  }
+
+  // HTTP REQUEST : DELETE
+  // Removes from database the unique object referenced by it's Firebase ID
+  delete(firebaseID: string) {
+    return this.http.delete(`${this.firebase}/<COLLECTION>/${firebaseID}.json`);
+  }
+}
+````

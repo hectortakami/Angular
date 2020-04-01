@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { ShowComponent } from "./components/show/show.component";
-import { RegisterComponent } from "./components/register/register.component";
+import { FormularyCrudComponent } from "./components/formulary-crud/formulary-crud.component";
 
 const routes: Routes = [
   { path: "show", component: ShowComponent },
-  { path: "register/:id", component: RegisterComponent },
+  { path: "register/:id", component: FormularyCrudComponent },
   { path: "**", pathMatch: "full", redirectTo: "show" }
 ];
 
