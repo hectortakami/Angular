@@ -1,0 +1,4 @@
+#scroller * {
+  /* don't allow the children of the scrollable element to be selected as an anchor node */
+  overflow-anchor: none;
+}

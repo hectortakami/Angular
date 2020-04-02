@@ -1,0 +1,11 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="giant">
+  <nb-card-header class="text-center mt-3">
+    <h4>Authenticate</h4>
+    <p>Please authenticate to start using the chat</p>
+  </nb-card-header>
+  <nb-card-footer class="d-flex justify-content-center">
+    <button nbButton status="danger" (click)="fireLogin('google')">
+      <nb-icon icon="google"></nb-icon> Google
+    </button>
+  </nb-card-footer>
+</nb-card>

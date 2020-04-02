@@ -1,0 +1,35 @@
+<nb-card>
+  <nb-card-header class="d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center">
+      <img
+        src="{{ user.avatar }}"
+        class="img-fluid rounded-circle mr-3"
+        style="width: 2.5rem; height: 2.5rem;"
+        alt="Avatar"
+      />
+      <h4 class="d-inline">Hi, {{ user.name | cropname }}!</h4>
+    </div>
+    <button nbButton status="danger" (click)="fireLogout()">
+      <nb-icon icon="log-out"></nb-icon>
+    </button>
+  </nb-card-header>
+</nb-card>
+
+<nb-chat
+  title="AngularFire Chat UI"
+  size="medium"
+  status="warning"
+  id="scroller"
+>
+  <nb-chat-message
+    *ngFor="let message of messages"
+    [type]="message.type"
+    [message]="message.text"
+    [sender]="message.user.name"
+    [avatar]="message.user.avatar"
+    [date]="message.date"
+    [reply]="message.reply"
+  ></nb-chat-message>
+  <nb-chat-form (send)="sendMessage($event, user.name, user.avatar, true)">
+  </nb-chat-form>
+</nb-chat>

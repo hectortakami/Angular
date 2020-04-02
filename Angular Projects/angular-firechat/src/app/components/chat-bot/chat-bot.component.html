@@ -1,0 +1,15 @@
+<nb-chat title="AngularFire Chat UI" size="large" status="info" id="scroller">
+  <nb-chat-message
+    *ngFor="let message of messages"
+    [type]="message.type"
+    [message]="message.text"
+    [sender]="message.user.name"
+    [avatar]="message.user.avatar"
+    [date]="message.date"
+    [reply]="!message.reply"
+  ></nb-chat-message>
+  <nb-chat-form
+    (send)="sendMessage($event, 'Bot', 'https://i.gifer.com/no.gif', false)"
+  >
+  </nb-chat-form>
+</nb-chat>

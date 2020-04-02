@@ -1,0 +1,21 @@
+<nb-layout>
+  <nb-layout-header fixed>
+    <h3>AngularFire Chat</h3>
+  </nb-layout-header>
+
+  <nb-layout-column>
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-6">
+        <app-login *ngIf="!fireauth.user.uid"></app-login>
+        <app-chat *ngIf="fireauth.user.uid"></app-chat>
+      </div>
+      <div class="col-6">
+        <app-chat-bot></app-chat-bot>
+      </div>
+    </div>
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>
+    <p>&copy; {{ year }} Hector M. Takami</p>
+  </nb-layout-footer>
+</nb-layout>
