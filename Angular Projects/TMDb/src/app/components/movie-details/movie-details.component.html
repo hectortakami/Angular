@@ -1,0 +1,74 @@
+<div *ngIf="loading" class="col-12 d-flex justify-content-center mt-5">
+  <div class="spinner-grow" style="width: 5rem; height: 5rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<span *ngIf="!loading">
+  <div
+    class="row d-flex justify-content-center align-items-center mx-0 mx-md-5 mt-3"
+  >
+    <div class="col-12 col-md-4 animated fadeIn">
+      <img
+        src="{{ movie.poster_path | defaultImage }}"
+        class="img-fluid px-1"
+        alt=""
+      />
+    </div>
+    <div class="col-12 col-md-8">
+      <nb-card class="animated fadeIn">
+        <nb-card-header
+          class="d-flex justify-content-between align-items-center"
+        >
+          <span *ngIf="movie.tagline">
+            <nb-icon icon="bookmark" class="mr-1"></nb-icon>
+            <em>"{{ movie.tagline }}"</em>
+          </span>
+          <h6 class="text-right d-none d-md-block">TMDb ID: {{ movie.id }}</h6>
+        </nb-card-header>
+      </nb-card>
+      <nb-card size="medium" class="animated fadeIn">
+        <nb-card-header>
+          <h3>{{ movie.title }}</h3>
+
+          <span>
+            <nb-icon icon="star" *ngFor="let star of rating"></nb-icon>
+            <nb-icon icon="star-outline" *ngFor="let star of missing"></nb-icon>
+          </span>
+          <span class="ml-3">{{ movie.vote_average }}/10</span>
+          <div>
+            <span
+              class="badge badge-primary badge-pill"
+              *ngFor="let genre of movie.genres"
+            >
+              {{ genre.name }}
+            </span>
+          </div>
+          <h6 class="mt-2 text-right">
+            Release date: {{ movie.release_date | date }}
+          </h6>
+        </nb-card-header>
+        <nb-card-body>
+          <h5 class="mt-3">Overview</h5>
+          <p style="font-size: 1rem;">{{ movie.overview }}</p>
+        </nb-card-body>
+        <nb-card-footer class="p-0">
+          <a
+            href="{{ movie.homepage }}"
+            nbButton
+            outline
+            fullWidth
+            size="large"
+            status="primary"
+          >
+            <span class="d-none d-md-inline">
+              {{ movie.title | cropTitle }}&nbsp;
+            </span>
+            <span class="d-inline d-md-none">Movie&nbsp;</span>
+            Homepage
+          </a>
+        </nb-card-footer>
+      </nb-card>
+    </div>
+  </div>
+</span>

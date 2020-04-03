@@ -1,0 +1,14 @@
+<nb-layout>
+  <nb-layout-header fixed>
+    <h5>The Movie Database (TMDb)</h5>
+  </nb-layout-header>
+
+  <nb-layout-column class="pt-0">
+    <nb-route-tabset [tabs]="tabs"></nb-route-tabset>
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>
+    <p>&copy; {{ year }} Hector M. Takami</p>
+  </nb-layout-footer>
+</nb-layout>

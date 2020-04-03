@@ -1,0 +1,26 @@
+<div *ngIf="loading" class="col-12 d-flex justify-content-center mt-5">
+  <div class="spinner-grow" style="width: 5rem; height: 5rem;" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<span *ngIf="!loading">
+  <div class="row mt-3">
+    <div class="col-12 col-md-3" *ngFor="let movie of movies">
+      <nb-card [routerLink]="['/detail', movie.id]" class="animated fadeIn">
+        <nb-card-header class="p-0">
+          <img src="{{ movie.poster_path }}" class="img-fluid " alt="" />
+        </nb-card-header>
+        <nb-card-footer class="text-right pt-2">
+          <h4 class="mb-0 mt-0">{{ movie.title | cropTitle }}</h4>
+          <p class="mt-0">{{ movie.release_date | date }}</p>
+          <nb-badge
+            text="{{ movie.vote_average }} / 10"
+            status="danger"
+            position="top left"
+          ></nb-badge>
+        </nb-card-footer>
+      </nb-card>
+    </div>
+  </div>
+</span>
