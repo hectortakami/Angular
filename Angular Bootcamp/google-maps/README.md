@@ -41,6 +41,11 @@ imports: [
   mapMarkers: MapMarker[] = [];
   latitude = 40.73061;
   longitude = -73.935242;
+
+   onClickMap(event: Event){
+    // event returns an object coords with the clicked latitude and longitude
+    // coords = { lat: <number>, lng: <number>}
+  }
   ```
 
 * Map Marker

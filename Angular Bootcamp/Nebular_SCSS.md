@@ -1,16 +1,6 @@
-# SCSS Cheat Sheet
+# Nebular Theme
 
-1. ##### Remove browser outline _(when any component is clicked)_
-
-   ```css
-   :focus {
-     outline: 0;
-   }
-   ```
-
-# Nebular
-
-- Toastr Modal
+- #### Toastr Modal
 
   1. `NbToastrModule` import
 
@@ -44,7 +34,7 @@
      this.showToast("top-start", "danger", 3000, 'Error Toastr', "Take me    with       your leader");
      ```
 
-- Dialog Modal
+- #### Dialog Modal
 
   1. `NbDialogModule` import
 
@@ -103,3 +93,54 @@
        }
      }
      ```
+
+- #### (Optional) Personalized Module
+
+  In order to handle multiple Nebular components you can create an aditional module to keep encapsulated the theme imports in one single file.
+
+  ```console
+    ng generate module nebular --flat
+  ```
+
+  _nebular.module.ts_
+
+  ```typescript
+  // ...
+  import { NbEvaIconsModule } from '@nebular/eva-icons';
+  import {
+    // All Nebular Component Modules goes here
+    } from '@nebular/theme';
+
+  @NgModule({
+    imports: [
+      // All Nebular Component Modules goes here
+    ],
+    exports: [
+      // All Nebular Component Modules goes here
+    ]
+  })
+  // ...
+  ```
+
+  _app.module.ts_
+
+  ```typescript
+  // ...
+  import { NebularModule } from './nebular.module';
+  @NgModule({
+    imports: [
+      NebularModule // Here will be the single module containing all theme necessarily imports
+    ],
+    // ...
+  })
+  ```
+
+# SCSS Cheat Sheet
+
+1. ##### Remove browser outline _(when any component is clicked)_
+
+   ```css
+   :focus {
+     outline: 0;
+   }
+   ```

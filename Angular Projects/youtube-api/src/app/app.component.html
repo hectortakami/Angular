@@ -1,0 +1,55 @@
+<nb-layout>
+  <nb-layout-header fixed>
+    <h3>YouTube API</h3>
+  </nb-layout-header>
+
+  <nb-layout-column>
+    <div class="row">
+      <div class="col-12 col-md-4" *ngFor="let video of videos">
+        <nb-card size="small">
+          <nb-card-header class="p-0 m-0">
+            <iframe
+              width="100%"
+              height="250rem"
+              [src]="video.snippet.resourceId.videoId | sanitize"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </nb-card-header>
+          <nb-card-footer>
+            <h6>{{ video.snippet.title | slice: 0:60 }}</h6>
+          </nb-card-footer>
+        </nb-card>
+      </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+      <nb-card class="w-50">
+        <nb-card-header>
+          <nb-actions size="medium" class="d-flex justify-content-center">
+            <nb-action
+              icon="chevron-left-outline"
+              *ngIf="prevPageToken"
+              (click)="getPreviousPage()"
+            ></nb-action>
+            <nb-action *ngIf="!prevPageToken"></nb-action>
+            <nb-action class="text-center">
+              <span class="d-none d-md-inline">Page &nbsp;</span>
+              {{ page }}
+            </nb-action>
+            <nb-action
+              icon="chevron-right-outline"
+              *ngIf="nextPageToken"
+              (click)="getNextPage()"
+            ></nb-action>
+            <nb-action *ngIf="!nextPageToken"></nb-action>
+          </nb-actions>
+        </nb-card-header>
+      </nb-card>
+    </div>
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>
+    <p>&copy; {{ year }} Hector M. Takami</p>
+  </nb-layout-footer>
+</nb-layout>

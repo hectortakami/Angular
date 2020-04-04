@@ -1715,9 +1715,14 @@ imports: [
   mapMarkers: MapMarker[] = [];
   latitude = 40.73061;
   longitude = -73.935242;
+
+   onClickMap(event: Event){
+    // event returns an object coords with the clicked latitude and longitude
+    // coords = { lat: <number>, lng: <number>}
+  }
   ```
 
-* Map Marker
+- Map Marker
 
   The best practice is create a model to manage the map market properties
   _map-market.ts_
@@ -1742,7 +1747,7 @@ imports: [
     </agm-map>
   ```
 
-* Marker Info Window (Dialog when marker is clicked)
+- Marker Info Window (Dialog when marker is clicked)
 
   _google-map.component.html_
 
@@ -1751,3 +1756,27 @@ imports: [
     <!-- Window design goes here -->
   </agm-info-window>
   ```
+
+## Youtube API
+
+https://developers.google.com/youtube/v3/
+
+##### DOM Video Sanitizer (Youtube embed videos) | Pipe Sanitizer
+
+```typescript
+import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+@Pipe({
+  name: 'sanitize'
+})
+export class SanitizePipe implements PipeTransform {
+  constructor(private domSanitizer: DomSanitizer) {}
+
+  transform(value: string): SafeResourceUrl {
+    let url = 'https://www.youtube.com/embed/';
+
+    return this.domSanitizer.bypassSecurityTrustResourceUrl(url + value);
+  }
+}
+```
