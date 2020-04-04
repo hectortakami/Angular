@@ -1,0 +1,39 @@
+<agm-map
+  (mapClick)="addMapMarker($event)"
+  [latitude]="latitude"
+  [longitude]="longitude"
+>
+  <agm-marker
+    *ngFor="let mapMarker of mapMarkers; let i = index"
+    [latitude]="mapMarker.latitude"
+    [longitude]="mapMarker.longitude"
+  >
+    <agm-info-window>
+      <h6>{{ mapMarker.title }}</h6>
+      <hr />
+      <p>
+        {{ mapMarker.description }}
+      </p>
+      <div class="row d-flex justify-content-center">
+        <button
+          nbButton
+          status="primary"
+          class="mx-1"
+          (click)="editMapMarker(i)"
+        >
+          Edit
+          <nb-icon icon="edit"></nb-icon>
+        </button>
+        <button
+          nbButton
+          status="danger"
+          class="mx-1"
+          (click)="deleteMapMarker(i)"
+        >
+          Delete
+        </button>
+      </div>
+      <hr />
+    </agm-info-window>
+  </agm-marker>
+</agm-map>

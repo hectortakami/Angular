@@ -117,15 +117,15 @@ https://angular.io/guide/router
 - ##### Navigate from TS component
 
   ```javascript
-  import { Router } from "@angular/router";
+  import { Router } from '@angular/router';
 
-  this.router.navigate(["/<route>", "<params?>"]);
+  this.router.navigate(['/<route>', '<params?>']);
   ```
 
 - ##### Retreive Params from route
 
   ```javascript
-  import { ActivatedRoute } from "@angular/router";
+  import { ActivatedRoute } from '@angular/router';
 
   this.activatedRouter.params.subscribe(myParams => {
     // TODO params values in 'myParams' variable
@@ -306,7 +306,7 @@ https://angular.io/guide/pipes
     string >
     (resolve => {
       setTimeout(() => {
-        resolve("Take me with your leader!");
+        resolve('Take me with your leader!');
       }, 4500);
     });
   ```
@@ -365,7 +365,7 @@ https://angular.io/guide/http
 _app.module.ts_
 
 ```typescript
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 ```
 
 ```typescript
@@ -379,7 +379,7 @@ imports: [
 _http.service.ts_
 
 ```typescript
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 ```
 
 ```typescript
@@ -784,9 +784,9 @@ https://auth0.com/
 3. Copy Auth-0 service implementation in the _auth.service.ts_
 
    ```typescript
-   import { Injectable } from "@angular/core";
-   import createAuth0Client from "@auth0/  auth0-spa-js";
-   import Auth0Client from "@auth0/auth0-spa-js/   dist/typings/Auth0Client";
+   import { Injectable } from '@angular/core';
+   import createAuth0Client from '@auth0/  auth0-spa-js';
+   import Auth0Client from '@auth0/auth0-spa-js/   dist/typings/Auth0Client';
    import {
      from,
      of,
@@ -794,19 +794,19 @@ https://auth0.com/
      BehaviorSubject,
      combineLatest,
      throwError
-   } from "rxjs";
-   import { tap, catchError, concatMap, shareReplay } from "rxjs/operators";
-   import { Router } from "@angular/router";
+   } from 'rxjs';
+   import { tap, catchError, concatMap, shareReplay } from 'rxjs/operators';
+   import { Router } from '@angular/router';
 
    @Injectable({
-     providedIn: "root"
+     providedIn: 'root'
    })
    export class AuthService {
      // Create an observable of Auth0 instance     of client
      auth0Client$ = (from(
        createAuth0Client({
-         domain: "<APP_DOMAIN",
-         client_id: "<CLIENT_ID>",
+         domain: '<APP_DOMAIN',
+         client_id: '<CLIENT_ID>',
          redirect_uri: `${window.location.origin}  `
        })
      ) as Observable<Auth0Client>).pipe(
@@ -864,7 +864,7 @@ https://auth0.com/
        checkAuth$.subscribe();
      }
 
-     login(redirectPath: string = "/") {
+     login(redirectPath: string = '/') {
        // A desired redirect path can be passed    to login method
        // (e.g., from a route guard)
        // Ensure Auth0 client instance exists
@@ -880,7 +880,7 @@ https://auth0.com/
      private handleAuthCallback() {
        // Call when app reloads after user logs    in with Auth0
        const params = window.location.search;
-       if (params.includes("code=") && params.includes("state=")) {
+       if (params.includes('code=') && params.includes('state=')) {
          let targetRoute: string; // Path to   redirect to after login processsed
          const authComplete$ = this.handleRedirectCallback$.pipe(
            // Have client, now call method to  handle auth callback redirect
@@ -889,7 +889,7 @@ https://auth0.com/
              targetRoute =
                cbRes.appState && cbRes.appState.target
                  ? cbRes.appState.target
-                 : "/";
+                 : '/';
            }),
            concatMap(() => {
              // Redirect callback complete; get    user and login status
@@ -910,7 +910,7 @@ https://auth0.com/
        this.auth0Client$.subscribe((client: Auth0Client) => {
          // Call method to log out
          client.logout({
-           client_id: "Kw3HPcG7f8Ilx4vFilGvDkliG3vOD4MF",
+           client_id: 'Kw3HPcG7f8Ilx4vFilGvDkliG3vOD4MF',
            returnTo: `${window.location.origin}`
          });
        });
@@ -921,13 +921,13 @@ https://auth0.com/
 4. Inject service in _app.component.ts_ or the component to implement authentication
 
    ```typescript
-   import { Component } from "@angular/core";
-   import { AuthService } from "./services/auth.   service";
+   import { Component } from '@angular/core';
+   import { AuthService } from './services/auth.   service';
 
    @Component({
-     selector: "app-root",
-     templateUrl: "./app.component.html",
-     styleUrls: ["./app.component.scss"]
+     selector: 'app-root',
+     templateUrl: './app.component.html',
+     styleUrls: ['./app.component.scss']
    })
    export class AppComponent {
      constructor(public auth: AuthService) {}
@@ -1095,7 +1095,7 @@ export class ReactiveFormComponent {
 
   listenChanges() {
     // Individual listener for each field (can be done for the entire formulary)
-    this.form.get("<field_name>").valueChanges.subscribe(response => {
+    this.form.get('<field_name>').valueChanges.subscribe(response => {
       // All processing when the field change
       // You can have the changed value from the input
     });
@@ -1106,9 +1106,9 @@ export class ReactiveFormComponent {
     // RESET clears all data, except when we define a
     // default value (we dont need to provide the entire structure)
     this.form.reset({
-      email: "hectak97.HT@gmail.com",
+      email: 'hectak97.HT@gmail.com',
       address: {
-        zipcode: "98134"
+        zipcode: '98134'
       }
     });
   }
@@ -1298,20 +1298,20 @@ imports: [
   export class TemplateFormComponent implements OnInit {
     fields = {
       firstname: {
-        value: "",
-        status: "basic"
+        value: '',
+        status: 'basic'
       },
       lastname: {
-        value: "",
-        status: "basic"
+        value: '',
+        status: 'basic'
       },
       email: {
-        value: "",
-        status: "basic"
+        value: '',
+        status: 'basic'
       },
       countries: {
-        value: "",
-        status: "basic"
+        value: '',
+        status: 'basic'
       }
     };
     countries: any[];
@@ -1326,26 +1326,26 @@ imports: [
 
     onSubmit(form: NgForm) {
       if (form.valid) {
-        this.fields.firstname.status = "success";
-        this.fields.lastname.status = "success";
-        this.fields.email.status = "success";
-        this.fields.countries.status = "success";
+        this.fields.firstname.status = 'success';
+        this.fields.lastname.status = 'success';
+        this.fields.email.status = 'success';
+        this.fields.countries.status = 'success';
         console.log(form.value);
       } else {
         Object.values(form.controls).forEach(fieldControl => {
           fieldControl.markAsTouched();
         });
         if (form.controls.firstname.invalid) {
-          this.fields.firstname.status = "danger";
+          this.fields.firstname.status = 'danger';
         }
         if (form.controls.lastname.invalid) {
-          this.fields.lastname.status = "danger";
+          this.fields.lastname.status = 'danger';
         }
         if (form.controls.email.invalid) {
-          this.fields.email.status = "danger";
+          this.fields.email.status = 'danger';
         }
         if (form.controls.country.invalid) {
-          this.fields.countries.status = "danger";
+          this.fields.countries.status = 'danger';
         }
       }
     }
@@ -1458,7 +1458,7 @@ _firebase.service.ts_
 
 ```typescript
 export class FirebaseService {
-  private firebase = "<FIREBASE_PROJECT_URL>";
+  private firebase = '<FIREBASE_PROJECT_URL>';
 
   constructor(private http: HttpClient) {}
 
@@ -1471,7 +1471,7 @@ export class FirebaseService {
         // With this pipe we return the exact same object + the recently created Firebase ID
         .pipe(
           map(response => {
-            object.firebaseID = response["name"];
+            object.firebaseID = response['name'];
             return object;
           })
         )
@@ -1621,15 +1621,15 @@ export class FirestoreService {
 _fireauth.service.ts_
 
 ```typescript
-import { AngularFireAuth } from "@angular/fire/auth";
-import { auth } from "firebase";
-import { UserModel } from "../models/user-model";
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth } from 'firebase';
+import { UserModel } from '../models/user-model';
 
 export class FireauthService {
   user: UserModel = {
-    name: "",
-    uid: "",
-    avatar: ""
+    name: '',
+    uid: '',
+    avatar: ''
     // All user proprties to be store when authenticate must be declaredin UserModel
   };
 
@@ -1639,9 +1639,9 @@ export class FireauthService {
         return;
       } else {
         // Asign all Fireauth properties from response in 'authUser' to our UserModel
-        this.user.name = authUser["displayName"];
-        this.user.uid = authUser["uid"];
-        this.user.avatar = authUser["photoURL"];
+        this.user.name = authUser['displayName'];
+        this.user.uid = authUser['uid'];
+        this.user.avatar = authUser['photoURL'];
         // ...
       }
     });
@@ -1649,13 +1649,13 @@ export class FireauthService {
 
   login(provider: string) {
     switch (provider) {
-      case "google":
+      case 'google':
         this.fireauth.auth.signInWithPopup(new auth.GoogleAuthProvider());
         break;
-      case "facebook":
+      case 'facebook':
         this.fireauth.auth.signInWithPopup(new auth.FacebookAuthProvider());
         break;
-      case "twitter":
+      case 'twitter':
         this.fireauth.auth.signInWithPopup(new auth.TwitterAuthProvider());
         break;
       // ... include all Social Media providers to authenticate with FireAuth
@@ -1666,8 +1666,88 @@ export class FireauthService {
 
   logout() {
     // Clear UserModel properties and sign-out
-    this.user = { name: "", uid: "", avatar: "" };
+    this.user = { name: '', uid: '', avatar: '' };
     this.fireauth.auth.signOut();
   }
 }
 ```
+
+## Google Maps
+
+Angular Maps Module (AGM) Docs: https://angular-maps.com/
+Create Google Maps [API KEY]: https://console.cloud.google.com/google/maps-apis/start
+
+```console
+npm install @agm/core --save
+```
+
+_app.module.ts_
+
+```typescript
+import { AgmCoreModule } from '@agm/core';
+// ...
+imports: [
+    BrowserModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'GOOGLE_MAPS_API_KEY'
+    })
+  ],
+```
+
+###### AGM Usage
+
+- Create Map
+  _google-map.component.html_
+
+  ```html
+  <agm-map
+    (mapClick)="clickOnMap($event)"
+    [latitude]="<MAP_LATITUDE>"
+    [longitude]="<MAP_LONGITUDE>"
+  >
+    <!-- ALL MARKERS GOES HERE -->
+  </agm-map>
+  ```
+
+  _google-map.component.ts_
+
+  ```typescript
+  mapMarkers: MapMarker[] = [];
+  latitude = 40.73061;
+  longitude = -73.935242;
+  ```
+
+* Map Marker
+
+  The best practice is create a model to manage the map market properties
+  _map-market.ts_
+
+  ```typescript
+  export class MapMarker {
+    constructor(
+      public latitude: number,
+      public longitude: number // More MapMarker properties if needed
+    ) {}
+  }
+  ```
+
+  _google-map.component.html_
+
+  ```html
+    <agm-marker
+    [latitude]="<MARKER_LATITUDE>"
+    [longitude]="<MARKER_LONGITUDE>"
+    >
+      <!-- INFO WINDOW GOES HERE -->
+    </agm-map>
+  ```
+
+* Marker Info Window (Dialog when marker is clicked)
+
+  _google-map.component.html_
+
+  ```html
+  <agm-info-window>
+    <!-- Window design goes here -->
+  </agm-info-window>
+  ```
