@@ -1,0 +1,21 @@
+<nb-card>
+  <nb-card-header>
+    <h4>Bar Chart</h4>
+  </nb-card-header>
+  <nb-card-body>
+    <div style="display: block">
+      <canvas
+        baseChart
+        height="75%"
+        width="100%"
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barChartOptions"
+        [colors]="barChartColors"
+        [legend]="barChartLegend"
+        [chartType]="barChartType"
+      >
+      </canvas>
+    </div>
+  </nb-card-body>
+</nb-card>

@@ -62,11 +62,30 @@ ng serve -o
      ></script>
      ```
 
-5. ##### Generate a new [ component | service | pipe ]
+5. ##### Generate a new [ component | service | pipe | guard | module ]
 
 ```console
-ng generate [ component | service | pipe | guard ] < path >
+ng generate [ component | service | pipe | guard | module ] < path >
 ```
+
+6. ##### Deploy Angular App (Apache server)
+
+   - Hash routes
+     _app-routing.module.ts_
+     ```typescript
+        // ...
+       imports: [RouterModule.forRoot(routes, {useHash: true})],
+        // ...
+     ```
+   - Create `dist` folder
+
+     ```console
+     ng build --prod
+     ```
+
+     Note: `environment.ts` file will be replaced with `environment.prod.ts` and all the TS classes & modulues will be minify and compile to JS.
+
+   - Upload `dist` folder to Apache Server
 
 ## Angular Directives
 
@@ -1779,4 +1798,46 @@ export class SanitizePipe implements PipeTransform {
     return this.domSanitizer.bypassSecurityTrustResourceUrl(url + value);
   }
 }
+```
+
+## Chart.js (ng2-charts)
+
+https://valor-software.com/ng2-charts/
+
+##### Installation
+
+```console
+npm install --save ng2-charts
+npm install --save chart.js
+```
+
+_app.module.ts_
+
+```typescript
+import { ChartsModule } from 'ng2-charts';
+// ...
+imports: [
+  ChartsModule
+  // ...
+];
+```
+
+##### Chart.js Usage
+
+- Line Chart
+  https://valor-software.com/ng2-charts/#/LineChart
+
+- Bar Chart
+  https://valor-software.com/ng2-charts/#/BarChart
+
+- Pie Chart
+  https://valor-software.com/ng2-charts/#/PieChart
+
+- Radar Chart
+  https://valor-software.com/ng2-charts/#/RadarChart
+
+Note: Add a width & height of 100% to make the chart fit responsively the content
+
+```html
+<canvas baseChart height="100%" width="100%" ...> </canvas>
 ```

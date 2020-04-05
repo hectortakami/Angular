@@ -1,0 +1,23 @@
+<nb-card>
+  <nb-card-header>
+    <h4>Line Chart</h4>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="flex-item">
+      <div style="display: block;">
+        <canvas
+          baseChart
+          height="75%"
+          width="100%"
+          [datasets]="lineChartData"
+          [labels]="lineChartLabels"
+          [options]="lineChartOptions"
+          [colors]="lineChartColors"
+          [legend]="lineChartLegend"
+          [chartType]="lineChartType"
+          (chartHover)="chartHovered($event)"
+        ></canvas>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

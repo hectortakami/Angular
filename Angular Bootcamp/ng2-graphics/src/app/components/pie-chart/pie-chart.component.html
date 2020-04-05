@@ -1,0 +1,21 @@
+<nb-card>
+  <nb-card-header>
+    <h4>Pie Chart</h4>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="chart d-block">
+      <canvas
+        baseChart
+        height="75%"
+        width="100%"
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [colors]="pieChartColors"
+        [legend]="pieChartLegend"
+      >
+      </canvas>
+    </div>
+  </nb-card-body>
+</nb-card>
