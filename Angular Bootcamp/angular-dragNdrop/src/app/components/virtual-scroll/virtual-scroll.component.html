@@ -1,0 +1,64 @@
+<nb-card size="medium">
+  <nb-card-header>
+    <h5>Virtual-Scroll</h5>
+  </nb-card-header>
+  <cdk-virtual-scroll-viewport itemSize="125" style="height: 100%">
+    <nb-list-item
+      *cdkVirtualFor="let user of users; let i = index; let counter = count"
+    >
+      <nb-user
+        class="animated slideInLeft slow"
+        size="giant"
+        [name]="user.name"
+        [title]="user.title"
+        badgeText="{{ i + 1 }}/{{ counter }}"
+        badgeStatus="primary"
+        badgePosition="bottom right"
+      >
+      </nb-user>
+    </nb-list-item>
+  </cdk-virtual-scroll-viewport>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>
+    <div class="row">
+      <div class="col-4 px-1">
+        <button
+          nbButton
+          outline
+          size="medium"
+          fullWidth
+          status="info"
+          (click)="move2Start()"
+        >
+          Start
+        </button>
+      </div>
+      <div class="col-4 px-1">
+        <button
+          nbButton
+          outline
+          size="medium"
+          fullWidth
+          status="basic"
+          (click)="move2Middle()"
+        >
+          Middle
+        </button>
+      </div>
+      <div class="col-4 px-1">
+        <button
+          nbButton
+          outline
+          size="medium"
+          fullWidth
+          status="danger"
+          (click)="move2End()"
+        >
+          End
+        </button>
+      </div>
+    </div>
+  </nb-card-header>
+</nb-card>

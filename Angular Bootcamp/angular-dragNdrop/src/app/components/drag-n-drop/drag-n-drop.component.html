@@ -1,0 +1,70 @@
+<nb-card>
+  <nb-card-header>
+    <h5>Drag & Drop</h5>
+  </nb-card-header>
+</nb-card>
+
+<div class="row">
+  <div class="col-12 col-md-4">
+    <nb-card size="medium">
+      <nb-card-header><h6>To-Do</h6></nb-card-header>
+      <nb-card-body
+        cdkDropList
+        #pendingList="cdkDropList"
+        [cdkDropListData]="todo"
+        [cdkDropListConnectedTo]="[doneList, reviewList]"
+        (cdkDropListDropped)="onDrop($event)"
+      >
+        <nb-alert
+          status="primary"
+          *ngFor="let item of todo; let i = index"
+          cdkDrag
+        >
+          📝 {{ item }}
+        </nb-alert>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12 col-md-4">
+    <nb-card size="medium">
+      <nb-card-header>
+        <h6>In-Progress 🤓</h6>
+      </nb-card-header>
+      <nb-card-body
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="[pendingList, reviewList]"
+        (cdkDropListDropped)="onDrop($event)"
+      >
+        <nb-alert
+          status="danger"
+          *ngFor="let item of done; let i = index"
+          cdkDrag
+          >{{ item }}
+        </nb-alert>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12 col-md-4">
+    <nb-card size="medium">
+      <nb-card-header><h6>Done! 😎</h6></nb-card-header>
+      <nb-card-body
+        cdkDropList
+        cdkDropList
+        #reviewList="cdkDropList"
+        [cdkDropListData]="review"
+        [cdkDropListConnectedTo]="[doneList, pendingList]"
+        (cdkDropListDropped)="onDrop($event)"
+      >
+        <nb-alert
+          status="success"
+          *ngFor="let item of review; let i = index"
+          cdkDrag
+        >
+          ✔ {{ item }}
+        </nb-alert>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
