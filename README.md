@@ -1,3 +1,61 @@
+## Fileupload
+
+1. ###### Create Firebase project
+
+   Note: Database & Storage rules must be set to `true` to work in development environment
+
+2. ###### Configure AngularFire
+
+   ```console
+   npm install firebase @angular/fire
+   ```
+
+   _environment.ts_
+
+   ```typescript
+   export const environment = {
+     production: false,
+     firebase: {
+       apiKey: '<your-key>',
+       authDomain: '<your-project-authdomain>',
+       databaseURL: '<your-database-URL>',
+       projectId: '<your-project-id>',
+       storageBucket: '<your-storage-bucket>',
+       messagingSenderId: '<your-messaging-sender-id>'
+     }
+   };
+   ```
+
+   _app.module.ts_
+
+   ```typescript
+   import { AngularFireModule } from '@angular/fire';
+   import { AngularFirestoreModule } from '@angular/fire/firestore';
+   import { AngularFireStorageModule } from '@angular/fire/storage';
+   import { environment } from '../environments/environment';
+   // ...
+   imports: [
+       BrowserModule,
+       AngularFireModule.initializeApp(environment.firebase),
+       AngularFirestoreModule, // firestore
+       AngularFireStorageModule // storage
+     ],
+   ```
+
+3. ###### File Model
+
+   ```typescript
+   export class FileModel {
+     constructor(
+       public file: File,
+       public fileName: string,
+       public url: string,
+       public uploadProgress: number = 0,
+       public status: boolean = false // Sets value true when the file is already uploaded
+     ) {}
+   }
+   ```
+
 # Angular 9+
 
 TypeScript + HTML + CSS toolset for building Progressive Web Applications (PWA).

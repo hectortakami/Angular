@@ -1,0 +1,84 @@
+<div class="row mt-5">
+  <div class="col-12 col-md-4">
+    <nb-card size="small">
+      <nb-card-body
+        (mouseHover)="hoverDropzone = $event"
+        [droppedFiles]="uploadedFiles"
+        appNgDropFiles
+        class="well drop-zone"
+        [ngClass]="{ 'file-over': hoverDropzone }"
+      >
+        <h5 class="text-center">Drop your files here</h5>
+        <img src="../../../assets/drop-images.png" class="img-fluid" alt="" />
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-12 col-md-8">
+    <nb-card size="small">
+      <nb-card-header class="text-right d-inline">
+        <button
+          nbButton
+          status="success"
+          class="mx-2"
+          [disabled]="!(uploadedFiles.length > 0)"
+          (click)="upload2Firebase()"
+          size="small"
+        >
+          Upload
+        </button>
+        <button nbButton status="danger" (click)="clearLoading()" size="small">
+          Clean
+        </button>
+      </nb-card-header>
+      <nb-card-body class="p-0">
+        <nb-list>
+          <nb-list-item style="background-color: #252547;">
+            <div class="row w-100 text-center">
+              <div class="col-2">
+                Status
+              </div>
+              <div class="col-3">
+                File Name
+              </div>
+              <div class="col-2">
+                File Size
+              </div>
+              <div class="col-5">
+                Upload Progress
+              </div>
+            </div>
+          </nb-list-item>
+          <nb-list-item *ngFor="let file of uploadedFiles">
+            <div class="row w-100 text-center">
+              <div class="col-2">
+                <nb-icon
+                  *ngIf="file.uploadProgress >= 100"
+                  icon="checkmark-circle-2"
+                  status="success"
+                ></nb-icon>
+                <nb-icon
+                  *ngIf="file.uploadProgress > 0 && file.uploadProgress < 100"
+                  icon="sync"
+                  status="info"
+                  class="fas fa-spin"
+                ></nb-icon>
+              </div>
+              <div class="col-3">
+                {{ file.fileName }}
+              </div>
+              <div class="col-2">
+                {{ file.file.size / 1024 / 1024 | number: '.2-2' }} MB
+              </div>
+              <div class="col-5">
+                <nb-progress-bar
+                  status="success"
+                  [value]="file.uploadProgress"
+                ></nb-progress-bar>
+              </div>
+            </div>
+          </nb-list-item>
+        </nb-list>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

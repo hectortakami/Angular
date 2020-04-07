@@ -1,0 +1,19 @@
+<nb-alert
+  *ngIf="loading"
+  [nbSpinner]="true"
+  nbSpinnerStatus="basic"
+  nbSpinnerSize="giant"
+  status="primary"
+  class="py-5 mt-5"
+>
+</nb-alert>
+
+<div class="row mt-5" *ngIf="!loading">
+  <div class="col-12 col-md-4" *ngFor="let img of images">
+    <nb-card>
+      <nb-card-header class="p-0">
+        <img src="{{ img.url }}" class="img-fluid" alt="" />
+      </nb-card-header>
+    </nb-card>
+  </div>
+</div>
