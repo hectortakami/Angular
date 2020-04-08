@@ -1,0 +1,26 @@
+<div
+  class="row mt-3 d-flex justify-content-center align-content-center px-0 px-md-5"
+>
+  <div class="col-12 col-md-4" *ngFor="let item of items">
+    <nb-card size="tiny">
+      <nb-card-body class="p-0">
+        <img
+          [src]="item.url"
+          class="img-fluid h-100 w-100"
+          alt="{{ item.name }}"
+        />
+      </nb-card-body>
+      <nb-card-footer class="p-0">
+        <button
+          nbButton
+          hero
+          fullWidth
+          status="primary"
+          (click)="voteGame(item.id, item.name)"
+        >
+          Vote for {{ item.name }}
+        </button>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>
