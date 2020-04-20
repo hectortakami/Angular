@@ -371,6 +371,114 @@ import * as faker from 'faker';
 // import * as faker from 'faker/locale/es_MX'
 ```
 
+## MapBox ( 2D & 3D Maps, Navigation, Loaction Searching )
+
+https://www.mapbox.com/
+pk.eyJ1IjoiaGVjdGFrIiwiYSI6ImNrOTZjOWlhbjB1azUzZHB1YWQxMno5OG0ifQ.3iBKM0Lfg8kPgdMZknluAw
+
+```console
+npm install mapbox-gl --save
+```
+
+`index.html`
+
+```html
+<link
+  href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css"
+  rel="stylesheet"
+/>
+```
+
+`map.component.html`
+
+```html
+<div id="YOUR_MAP_CONTAINER_ID"></div>
+```
+
+`map.component.ts`
+
+```typescript
+import * as mapboxgl from 'mapbox-gl';
+// ...
+setupMap(){
+  setup3Dmap(container: string) {
+    // INITIALIZE MAP SETTINGS
+    mapboxgl.accessToken =
+      'pk.eyJ1IjoiaGVjdGFrIiwiYSI6ImNrOTZjOWlhbjB1azUzZHB1YWQxMno5OG0ifQ.3iBKM0Lfg8kPgdMZknluAw';
+    var map = new mapboxgl.Map({
+
+      style: 'mapbox://styles/mapbox/light-v10',
+
+      // IMPORTANT! center:[LONGITUDE, LATITUDE]
+      center: [this.longitude, this.latitude],
+      zoom: 15.5,
+      pitch: 45,
+      bearing: -17.6,
+      container: YOUR_MAP_CONTAINER_ID,
+      antialias: true
+    });
+
+    // CREATE 3D BUILDING REFERENCES
+    map.on('load', function() {
+      map.resize();
+
+      var layers = map.getStyle().layers;
+      var labelLayerId;
+      for (var i = 0; i < layers.length; i++) {
+        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+          labelLayerId = layers[i].id;
+          break;
+        }
+      }
+
+      map.addLayer(
+        {
+          id: '3d-buildings',
+          source: 'composite',
+          'source-layer': 'building',
+          filter: ['==', 'extrude', 'true'],
+          type: 'fill-extrusion',
+          minzoom: 15,
+          paint: {
+            'fill-extrusion-color': '#aaa',
+
+            // use an 'interpolate' expression to add a smooth transition effect to the
+            // buildings as the user zooms in
+            'fill-extrusion-height': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              15,
+              0,
+              15.05,
+              ['get', 'height']
+            ],
+            'fill-extrusion-base': [
+              'interpolate',
+              ['linear'],
+              ['zoom'],
+              15,
+              0,
+              15.05,
+              ['get', 'min_height']
+            ],
+            'fill-extrusion-opacity': 0.6
+          }
+        },
+        labelLayerId
+      );
+    });
+
+    // CREATE MAP MARKER
+    var marker = new mapboxgl.Marker({
+      draggable: false
+    })
+      .setLngLat([this.longitude, this.latitude])
+      .addTo(map);
+  }
+}
+```
+
 ## Google Maps (AGM)
 
 Angular Maps Module (AGM) Docs: https://angular-maps.com/
@@ -555,6 +663,69 @@ export class TmdbService {
       );
    }
    ```
+
+## News API
+
+https://newsapi.org/
+
+```typescript
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
+import { ResultTopHeadlines, Article } from '../models/interfaces';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class NewsService {
+  apiKey = environment.apiKey;
+  url = 'http://newsapi.org/v2';
+  pageNum = 0;
+  categories = {
+    general: 0,
+    business: 0,
+    health: 0,
+    entertainment: 0,
+    science: 0,
+    sports: 0,
+    technology: 0
+  };
+  actualCategory = 'general';
+
+  constructor(private http: HttpClient) {}
+
+  getTopHeadlines() {
+    this.pageNum++;
+    return this.http
+      .get(
+        `${this.url}/top-headlines?country=us&page=${this.pageNum}&apiKey=${this.apiKey}`
+      )
+      .pipe(
+        map((response: ResultTopHeadlines): Article[] => {
+          return response.articles;
+        })
+      );
+  }
+
+  getNewsByCategory(category: string) {
+    if (this.actualCategory != category) {
+      this.categories[this.actualCategory] = 0;
+      this.actualCategory = category;
+    }
+    const categoryPage = this.categories[this.actualCategory]++;
+    return this.http
+      .get(
+        `${this.url}/top-headlines?country=us&category=${category}&page=${categoryPage}&apiKey=${this.apiKey}`
+      )
+      .pipe(
+        map((response: ResultTopHeadlines): Article[] => {
+          return response.articles;
+        })
+      );
+  }
+}
+```
 
 ## Spotify API
 

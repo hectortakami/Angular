@@ -233,7 +233,7 @@ https://angular.io/guide/router
   ```javascript
   import { ActivatedRoute } from '@angular/router';
 
-  this.activatedRouter.params.subscribe(myParams => {
+  this.activatedRouter.params.subscribe((myParams) => {
     // TODO params values in 'myParams' variable
   });
   ```
@@ -270,6 +270,20 @@ https://angular.io/guide/router
     component: ProtectedComponent,
     canActivate: [ <MyGuardClass> , ... ]
   }
+  ```
+
+- ##### Lazy Load (load routes from other modules)
+
+  Helps angular routing module to load routes from other modules, declaring a relative path to the module. It prevents the app from loading un-used resources.
+
+  `app-routing.module.ts`
+
+  ```typescript
+    {
+      path: "PATH",
+      loadChildren: () =>
+        import("<RELATIVE_PATH>/MODULE.module").then((m) => m.MODULE_NAME),
+    }
   ```
 
 ## Component Interaction
@@ -410,7 +424,7 @@ https://angular.io/guide/pipes
   promise_variable =
     new Promise() <
     string >
-    (resolve => {
+    ((resolve) => {
       setTimeout(() => {
         resolve('Take me with your leader!');
       }, 4500);
@@ -478,7 +492,7 @@ import { HttpClientModule } from '@angular/common/http';
 imports: [
   BrowserModule,
   // import HttpClientModule after BrowserModule.
-  HttpClientModule
+  HttpClientModule,
 ];
 ```
 
@@ -569,9 +583,9 @@ export class ReactiveFormComponent {
     if (this.form.valid) {
       console.log(this.form);
     } else {
-      Object.values(this.form.controls).forEach(field => {
+      Object.values(this.form.controls).forEach((field) => {
         if (field instanceof FormGroup) {
-          Object.values(field.controls).forEach(nestedField =>
+          Object.values(field.controls).forEach((nestedField) =>
             nestedField.markAsTouched()
           );
         } else {
@@ -591,7 +605,7 @@ export class ReactiveFormComponent {
 
   listenChanges() {
     // Individual listener for each field (can be done for the entire formulary)
-    this.form.get('<field_name>').valueChanges.subscribe(response => {
+    this.form.get('<field_name>').valueChanges.subscribe((response) => {
       // All processing when the field change
       // You can have the changed value from the input
     });
@@ -604,8 +618,8 @@ export class ReactiveFormComponent {
     this.form.reset({
       email: 'hectak97.HT@gmail.com',
       address: {
-        zipcode: '98134'
-      }
+        zipcode: '98134',
+      },
     });
   }
 }
@@ -795,25 +809,25 @@ imports: [
     fields = {
       firstname: {
         value: '',
-        status: 'basic'
+        status: 'basic',
       },
       lastname: {
         value: '',
-        status: 'basic'
+        status: 'basic',
       },
       email: {
         value: '',
-        status: 'basic'
+        status: 'basic',
       },
       countries: {
         value: '',
-        status: 'basic'
-      }
+        status: 'basic',
+      },
     };
     countries: any[];
 
     constructor(private countriesService: CountriesService) {
-      countriesService.getCountries().subscribe(response => {
+      countriesService.getCountries().subscribe((response) => {
         this.countries = response;
       });
     }
@@ -828,7 +842,7 @@ imports: [
         this.fields.countries.status = 'success';
         console.log(form.value);
       } else {
-        Object.values(form.controls).forEach(fieldControl => {
+        Object.values(form.controls).forEach((fieldControl) => {
           fieldControl.markAsTouched();
         });
         if (form.controls.firstname.invalid) {
@@ -938,3 +952,21 @@ imports: [
       </small>
     </div>
     ```
+
+## Local Storage
+
+Stores in browser's session memory data in Key:Value format as coockies
+
+```typescript
+    storeLocalStorage() {
+        localStorage.setItem('KEY', JSON.stringify(this.lists));
+    }
+
+    getLocalStorage() {
+        if (localStorage.getItem('KEY')) {
+            return JSON.parse(localStorage.getItem('KEY'));
+        } else {
+            return null
+        }
+    }
+```
