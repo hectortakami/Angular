@@ -950,3 +950,24 @@ The Firebase Functions (HTTP REST Calls) must be called using the `HttpClientMod
    ```
 
    _Note: In case of error verify the `firebase.json` file and set hosting/public property as follows`"hosting: "public": "./dist/<YOUR_PROJECT_NAME>"`_
+
+### Common Issues (AngularFire)
+
+- `ERROR in node_modules/@angular/fire/angularfire2.d.ts`
+
+  ```console
+  Type 'T[K]' does not satisfy the constraint '(...args: any) => any'.
+  [K in FunctionPropertyNames<T>]: ReturnType<T[K]> extends Promise<any> ? never : K;
+  ```
+
+  _Solution: modify in `tsconfig.json` the `compilerOptions` as follows:_
+
+  ```typescript
+  {
+    compilerOptions: {
+      //...
+      "skipLibCheck": true,
+      //...
+    }
+  }
+  ```
