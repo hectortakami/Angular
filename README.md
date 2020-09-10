@@ -52,133 +52,6 @@ $ ng generate {component | service | pipe | guard | module} [creation_path_and_f
 
 3. Ready to upload `/dist` folder to Web Server
 
-## Angular CDK
-
-### Drag & Drop | Virtual Scroll
-
-Install Component Development Kit (CDK)
-
-```console
-$ npm install @angular/cdk
-```
-
-- ##### Drag & Drop
-
-  _app.module.ts_
-
-  ```typescript
-  import { DragDropModule } from '@angular/cdk/drag-drop';
-  // ...
-  imports: [
-    DragDropModule
-  ],
-  ```
-
-  _drag-&-drop.component.html_
-
-  ```html
-  <!-- Container of draggable elements -->
-  <nb-card-body
-    cdkDropList
-    #DropListID="cdkDropList"
-    [cdkDropListData]="listData"
-    [cdkDropListConnectedTo]="[<DropListID>, <DropListID>, ...]"
-    (cdkDropListDropped)="onDrop($event)"
-  >
-    <!-- Draggable element -->
-    <nb-alert cdkDrag *ngFor="let item of listData; let i = index">
-      <!-- Content -->
-    </nb-alert>
-  </nb-card-body>
-  ```
-
-  _drag-&-drop.component.ts_
-
-  ```typescript
-  import {
-    CdkDragDrop,
-    moveItemInArray,
-    transferArrayItem
-  } from '@angular/cdk/drag-drop';
-  // ...
-  listData = ['Get to work', 'Go home', ...];
-  // More DropList data must be declared here as well
-
-  onDrop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      // Drag & Drop elements in the same DropList
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      // Move elements from one DropList to another
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    }
-  }
-  ```
-
-- ##### Virtual Scroll
-
-  _app.module.ts_
-
-  ```typescript
-  import { ScrollingModule } from '@angular/cdk/scrolling';
-  // ...
-  imports: [
-    ScrollingModule
-  ],
-  ```
-
-  _virtual-scroll.component.html_
-
-  ```html
-  <cdk-virtual-scroll-viewport itemSize="125" style="height: 100%">
-    <nb-list-item
-      *cdkVirtualFor="let user of users; let i = index; let counter = count"
-    >
-      <nb-user
-        class="animated slideInLeft slow"
-        size="giant"
-        [name]="user.name"
-        [title]="user.title"
-        badgeText="{{ i + 1 }}/{{ counter }}"
-        badgeStatus="primary"
-        badgePosition="bottom right"
-      >
-      </nb-user>
-    </nb-list-item>
-  </cdk-virtual-scroll-viewport>
-  ```
-
-  _virtual-scroll.component.ts_
-
-  ```typescript
-  import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-  // ...
-
-  // Declare the scroll container as TS element to work with
-  @ViewChild(CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
-
-  // Scroll position funtions
-  move2Start() {
-      this.viewport.scrollToIndex(0);
-  }
-  move2Middle() {
-      const middle = items.length / 2;
-      this.viewport.scrollToIndex(middle - 1);
-  }
-  move2End() {
-      this.viewport.scrollToIndex(items.length);
-  }
-  ```
-
 ## Angular Directives
 
 #### Structural Directives
@@ -217,79 +90,189 @@ https://angular.io/guide/structural-directives#structural-directives
   <div [ngClass]="{'class': <boolean>}"></div>
   ```
 
+## Modules
+
+Groups related components into one unique bundle in order to reduce the `app.module.ts` importing size.
+
+```
+$ ng generate module [module_name]
+```
+
+**my-module.module.ts**
+
+```ts
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router"; // Used if components render <router-outlet>
+// The component importations goes here
+
+@NgModule({
+  declarations: [
+    // Components to include in module
+  ],
+  imports: [CommonModule, RouterModule],
+  exports: [
+    // IMPORTANT: Export the same components as declared in order to used them anywhere else in the app
+  ],
+})
+export class MyModule {}
+```
+
+_**Note:** Once the components are isolated in the module, import it into `app.module.ts` and any other module to enable communication between them_
+
+**app.module.ts**
+
+```ts
+// ...
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    // Import module here
+    AppRoutingModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+```
+
+### Module Routes
+
+The routes can be also wrap in a bundle to rreduce file size in `app-routing.module.ts` file
+
+**module.routes.ts**
+
+```ts
+import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+
+const routes: Routes = [
+  // Define routes as any other route
+   {
+        path: 'path',
+        component: SomeComponent,
+   },
+  // Inner routes, routed inside a main component
+  {
+    path: '',
+    component: MainComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'route',
+        pathMatch: 'full',
+      },
+      {
+        path: 'route',
+        component: RoutedInsideMainComponent,
+      },
+      // ...
+      },
+    ],
+  },
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class MyModuleRoutingModule {}
+```
+
+**app-routing.module.ts**
+
+```ts
+// ...
+export const routes: Routes = [
+  // Main routes are defined in here
+];
+
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes),
+    MyModuleRoutingModule, // Here we import the routing module
+  ],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
+```
+
 ## Routes & Parameters
 
 https://angular.io/guide/router
 
-- ##### Navigate in HTML Template
-  ```html
-  <a [routerLink]="['/<route>']" routerLinkActive="active"> </a>
-  ```
-- ##### Navigate from TS component
+### Navigate in HTML Template
 
-  ```javascript
-  import { Router } from "@angular/router";
+```html
+<a [routerLink]="['/<route>']" routerLinkActive="active"> </a>
+```
 
-  this.router.navigate(["/<route>", "<params?>"]);
-  ```
+### Navigate from TS component
 
-- ##### Retreive Params from route
+```javascript
+import { Router } from "@angular/router";
 
-  ```javascript
-  import { ActivatedRoute } from "@angular/router";
+this.router.navigate(["/<route>", "<params?>"]);
+```
 
-  this.activatedRouter.params.subscribe((myParams) => {
-    // TODO params values in 'myParams' variable
-  });
-  ```
+### Retreive Params from route
 
-- ##### Route Guard (CanActivate)
+```javascript
+import { ActivatedRoute } from "@angular/router";
 
-  ```console
-  ng g g services/<myGuard>
-    • CanActivate
-  ```
+this.activatedRouter.params.subscribe((myParams) => {
+  // TODO params values in 'myParams' variable
+});
+```
 
-  ###### Prevents accessing a route without accomplish a condition
+### Route Guard (CanActivate)
 
-  _myGuard.guard.ts_
+```console
+ng g g services/<myGuard>
+  • CanActivate
+```
 
-  ```typescript
-  export class MyGuardClass implements  CanActivate {
+#### Prevents accessing a route without accomplish a condition
 
-    canActivate(
-      next: ActivatedRouteSnapshot,
-      state: RouterStateSnapshot
-    ): Observable<boolean> {
-      // ToDo guard implementation to determine   if a route can be accessed or not
-      return <boolean>;
-    }
+_myGuard.guard.ts_
+
+```typescript
+export class MyGuardClass implements  CanActivate {
+
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<boolean> {
+    // ToDo guard implementation to determine   if a route can be accessed or not
+    return <boolean>;
   }
-  ```
+}
+```
 
-  _app-routing.module.ts_
+_app-routing.module.ts_
 
-  ```
+```
+{
+  path: "protected",
+  component: ProtectedComponent,
+  canActivate: [ <MyGuardClass> , ... ]
+}
+```
+
+### Lazy Load (load routes from other modules)
+
+Helps angular routing module to load routes from other modules, declaring a relative path to the module. It prevents the app from loading un-used resources.
+
+`app-routing.module.ts`
+
+```typescript
   {
-    path: "protected",
-    component: ProtectedComponent,
-    canActivate: [ <MyGuardClass> , ... ]
+    path: "PATH",
+    loadChildren: () =>
+      import("<RELATIVE_PATH>/MODULE.module").then((m) => m.MODULE_NAME),
   }
-  ```
-
-- ##### Lazy Load (load routes from other modules)
-
-  Helps angular routing module to load routes from other modules, declaring a relative path to the module. It prevents the app from loading un-used resources.
-
-  `app-routing.module.ts`
-
-  ```typescript
-    {
-      path: "PATH",
-      loadChildren: () =>
-        import("<RELATIVE_PATH>/MODULE.module").then((m) => m.MODULE_NAME),
-    }
-  ```
+```
 
 ## Component Interaction
 
@@ -975,3 +958,130 @@ Stores in browser's session memory data in Key:Value format as coockies
         }
     }
 ```
+
+## Angular CDK
+
+### Drag & Drop | Virtual Scroll
+
+Install Component Development Kit (CDK)
+
+```console
+$ npm install @angular/cdk
+```
+
+- ##### Drag & Drop
+
+  _app.module.ts_
+
+  ```typescript
+  import { DragDropModule } from '@angular/cdk/drag-drop';
+  // ...
+  imports: [
+    DragDropModule
+  ],
+  ```
+
+  _drag-&-drop.component.html_
+
+  ```html
+  <!-- Container of draggable elements -->
+  <nb-card-body
+    cdkDropList
+    #DropListID="cdkDropList"
+    [cdkDropListData]="listData"
+    [cdkDropListConnectedTo]="[<DropListID>, <DropListID>, ...]"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <!-- Draggable element -->
+    <nb-alert cdkDrag *ngFor="let item of listData; let i = index">
+      <!-- Content -->
+    </nb-alert>
+  </nb-card-body>
+  ```
+
+  _drag-&-drop.component.ts_
+
+  ```typescript
+  import {
+    CdkDragDrop,
+    moveItemInArray,
+    transferArrayItem
+  } from '@angular/cdk/drag-drop';
+  // ...
+  listData = ['Get to work', 'Go home', ...];
+  // More DropList data must be declared here as well
+
+  onDrop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      // Drag & Drop elements in the same DropList
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      // Move elements from one DropList to another
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+  }
+  ```
+
+- ##### Virtual Scroll
+
+  _app.module.ts_
+
+  ```typescript
+  import { ScrollingModule } from '@angular/cdk/scrolling';
+  // ...
+  imports: [
+    ScrollingModule
+  ],
+  ```
+
+  _virtual-scroll.component.html_
+
+  ```html
+  <cdk-virtual-scroll-viewport itemSize="125" style="height: 100%">
+    <nb-list-item
+      *cdkVirtualFor="let user of users; let i = index; let counter = count"
+    >
+      <nb-user
+        class="animated slideInLeft slow"
+        size="giant"
+        [name]="user.name"
+        [title]="user.title"
+        badgeText="{{ i + 1 }}/{{ counter }}"
+        badgeStatus="primary"
+        badgePosition="bottom right"
+      >
+      </nb-user>
+    </nb-list-item>
+  </cdk-virtual-scroll-viewport>
+  ```
+
+  _virtual-scroll.component.ts_
+
+  ```typescript
+  import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+  // ...
+
+  // Declare the scroll container as TS element to work with
+  @ViewChild(CdkVirtualScrollViewport) viewport: CdkVirtualScrollViewport;
+
+  // Scroll position funtions
+  move2Start() {
+      this.viewport.scrollToIndex(0);
+  }
+  move2Middle() {
+      const middle = items.length / 2;
+      this.viewport.scrollToIndex(middle - 1);
+  }
+  move2End() {
+      this.viewport.scrollToIndex(items.length);
+  }
+  ```
