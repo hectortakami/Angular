@@ -18,10 +18,16 @@ https://angular.io/cli
 $ ng help
 ```
 
-### Run angular app nodemon (live-reload) & open browser
+### Run app nodemon (live-reload) & open browser
 
 ```console
 $ ng serve [-o]?
+```
+
+### Run Jasmine tests & create a test-coverage report of the code (open /coverage/index.html)
+
+```
+$ ng test [--code-coverage]?
 ```
 
 ### Generate a new [ component | service | pipe | guard | module ]
@@ -1085,3 +1091,62 @@ $ npm install @angular/cdk
       this.viewport.scrollToIndex(items.length);
   }
   ```
+
+## Karma & Jasmine Testing
+
+**Advantages**
+
+- Allows to found/prevent errors before release
+- Tests code written for other programmers
+- Helps to generate a much more cleaner code w/reports & statistics
+
+**Disadvantages**
+
+- It doesn´s guarantees an error-free code
+- Demands time, resources, costs and much more effort
+- Not practical when it´s a one-person workforce development
+
+### Testing Lifecycle
+
+```ts
+beforeAll(() => {
+  // HERE GOES CONFIGURATION BEFORE ALL TESTS
+  // Triggered only ONCE whe the .spec file is loaded
+});
+afterAll(() => {
+  // HERE GOES CONFIGURATION AFTER ALL TESTS
+  // Triggered only ONCE whe the .spec file and all of it´s tests are finished
+});
+beforeEach(() => {
+  // HERE GOES CONFIGURATION BEFORE EACH TESTS
+  // Triggered REPEATLY when each individually test is loaded
+});
+afterEach(() => {
+  // HERE GOES CONFIGURATION AFTER EACH TESTS
+  // Triggered REPEATLY when each individually test is ended
+});
+```
+
+### Unit Testing
+
+Isolated tests that evaluates individual functionality of the components.
+
+**element.component.spec.ts**
+
+```ts
+// Test Group to be evaluated
+describe("TEST GROUP NAME", () => {
+  // Individual Test Definition
+  it("TEST NAME", () => {
+    // HERE GOES ALL TEST FUNCTION & ASSIGNMENTS DEFINITIONS
+    expect( VAR_TO_COMPARE ).{ toBe | toContain | toBeTruthy | toBeFalsy | toBeGreaterThanOrEqual | ... }(RESULT_TO_PASS_TEST);
+  });
+  // More individual tests in group goes in here...
+});
+```
+
+_**Note:** You can add an `x` in the begining of the describe section, as `xdescribe( ... )` to skip a test group while compiling to be evaluate_
+
+### Integration Testing
+
+### E2E Testing (End-to-end)
