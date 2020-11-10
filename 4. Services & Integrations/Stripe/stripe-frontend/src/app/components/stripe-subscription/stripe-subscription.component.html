@@ -1,0 +1,42 @@
+<div class="card ">
+  <div class="card-body">
+    <h4 class="card-title text-center">Stripe Subscription</h4>
+
+    <span *ngFor="let plan of plans" (click)="selected = plan">
+      <div
+        class="card mb-3"
+        [ngClass]="{ 'border-success': plan == selected }"
+        style="border-width: 2.5px; border-radius: 10px;"
+      >
+        <div class="row">
+          <div class="col-md-5">
+            <img src="{{ plan.images[0] }}" class="card-img p-0" />
+          </div>
+          <div class="col-md-7">
+            <div class="card-body pl-0 text-center">
+              <h5 class="card-title mb-1">{{ plan.name }}</h5>
+              <p class="card-text">
+                {{ plan.amount / 100 | currency }} / {{ plan.interval }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </span>
+
+    <hr />
+    <ngx-stripe-card
+      [options]="cardOptions"
+      [elementsOptions]="elementsOptions"
+    ></ngx-stripe-card>
+    <hr />
+
+    <button
+      type="button"
+      class="btn btn-success btn-block mt-3"
+      (click)="createToken()"
+    >
+      Suscribirse
+    </button>
+  </div>
+</div>
